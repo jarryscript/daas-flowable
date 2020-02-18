@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<bean id="checker" class="com.doublechain.flowable.FlowableObjectChecker" scope="prototype"></bean>
+
+	<bean id="platformManagerBase" class="com.doublechain.flowable.platform.PlatformManagerImpl"/>
+	<bean id="platformManager" class="com.doublechain.flowable.platform.PlatformCustomManagerImpl" parent="platformManagerBase" ></bean>
+	
+	<bean id="userManagerBase" class="com.doublechain.flowable.user.UserManagerImpl"/>
+	<bean id="userManager" class="com.doublechain.flowable.user.UserManagerImpl" parent="userManagerBase" ></bean>
+	
+	<bean id="roleManagerBase" class="com.doublechain.flowable.role.RoleManagerImpl"/>
+	<bean id="roleManager" class="com.doublechain.flowable.role.RoleCustomManagerImpl" parent="roleManagerBase" ></bean>
+	
+	<bean id="leaveRecordManagerBase" class="com.doublechain.flowable.leaverecord.LeaveRecordManagerImpl"/>
+	<bean id="leaveRecordManager" class="com.doublechain.flowable.leaverecord.LeaveRecordManagerImpl" parent="leaveRecordManagerBase" ></bean>
+	
+	<bean id="leaveRecordTypeManagerBase" class="com.doublechain.flowable.leaverecordtype.LeaveRecordTypeManagerImpl"/>
+	<bean id="leaveRecordTypeManager" class="com.doublechain.flowable.leaverecordtype.LeaveRecordTypeCustomManagerImpl" parent="leaveRecordTypeManagerBase" ></bean>
+	
+	<bean id="holydaySettingManagerBase" class="com.doublechain.flowable.holydaysetting.HolydaySettingManagerImpl"/>
+	<bean id="holydaySettingManager" class="com.doublechain.flowable.holydaysetting.HolydaySettingManagerImpl" parent="holydaySettingManagerBase" ></bean>
+	
+	<bean id="provinceManagerBase" class="com.doublechain.flowable.province.ProvinceManagerImpl"/>
+	<bean id="provinceManager" class="com.doublechain.flowable.province.ProvinceManagerImpl" parent="provinceManagerBase" ></bean>
+	
+	<bean id="cityManagerBase" class="com.doublechain.flowable.city.CityManagerImpl"/>
+	<bean id="cityManager" class="com.doublechain.flowable.city.CityManagerImpl" parent="cityManagerBase" ></bean>
+	
+	<bean id="districtManagerBase" class="com.doublechain.flowable.district.DistrictManagerImpl"/>
+	<bean id="districtManager" class="com.doublechain.flowable.district.DistrictManagerImpl" parent="districtManagerBase" ></bean>
+	
+	<bean id="userDomainManagerBase" class="com.doublechain.flowable.userdomain.UserDomainManagerImpl"/>
+	<bean id="userDomainManager" class="com.doublechain.flowable.userdomain.UserDomainCustomManagerImpl" parent="userDomainManagerBase" ></bean>
+	
+	<bean id="userWhiteListManagerBase" class="com.doublechain.flowable.userwhitelist.UserWhiteListManagerImpl"/>
+	<bean id="userWhiteListManager" class="com.doublechain.flowable.userwhitelist.UserWhiteListManagerImpl" parent="userWhiteListManagerBase" ></bean>
+	
+	<bean id="secUserManagerBase" class="com.doublechain.flowable.secuser.SecUserManagerImpl"/>
+	<bean id="secUserManager" class="com.doublechain.flowable.secuser.SecUserCustomManagerImpl" parent="secUserManagerBase" ></bean>
+	
+	<bean id="userAppManagerBase" class="com.doublechain.flowable.userapp.UserAppManagerImpl"/>
+	<bean id="userAppManager" class="com.doublechain.flowable.userapp.UserAppCustomManagerImpl" parent="userAppManagerBase" ></bean>
+	
+	<bean id="quickLinkManagerBase" class="com.doublechain.flowable.quicklink.QuickLinkManagerImpl"/>
+	<bean id="quickLinkManager" class="com.doublechain.flowable.quicklink.QuickLinkManagerImpl" parent="quickLinkManagerBase" ></bean>
+	
+	<bean id="listAccessManagerBase" class="com.doublechain.flowable.listaccess.ListAccessManagerImpl"/>
+	<bean id="listAccessManager" class="com.doublechain.flowable.listaccess.ListAccessManagerImpl" parent="listAccessManagerBase" ></bean>
+	
+	<bean id="objectAccessManagerBase" class="com.doublechain.flowable.objectaccess.ObjectAccessManagerImpl"/>
+	<bean id="objectAccessManager" class="com.doublechain.flowable.objectaccess.ObjectAccessManagerImpl" parent="objectAccessManagerBase" ></bean>
+	
+	<bean id="loginHistoryManagerBase" class="com.doublechain.flowable.loginhistory.LoginHistoryManagerImpl"/>
+	<bean id="loginHistoryManager" class="com.doublechain.flowable.loginhistory.LoginHistoryManagerImpl" parent="loginHistoryManagerBase" ></bean>
+	
+	<bean id="genericFormManagerBase" class="com.doublechain.flowable.genericform.GenericFormManagerImpl"/>
+	<bean id="genericFormManager" class="com.doublechain.flowable.genericform.GenericFormCustomManagerImpl" parent="genericFormManagerBase" ></bean>
+	
+	<bean id="formMessageManagerBase" class="com.doublechain.flowable.formmessage.FormMessageManagerImpl"/>
+	<bean id="formMessageManager" class="com.doublechain.flowable.formmessage.FormMessageManagerImpl" parent="formMessageManagerBase" ></bean>
+	
+	<bean id="formFieldMessageManagerBase" class="com.doublechain.flowable.formfieldmessage.FormFieldMessageManagerImpl"/>
+	<bean id="formFieldMessageManager" class="com.doublechain.flowable.formfieldmessage.FormFieldMessageManagerImpl" parent="formFieldMessageManagerBase" ></bean>
+	
+	<bean id="formFieldManagerBase" class="com.doublechain.flowable.formfield.FormFieldManagerImpl"/>
+	<bean id="formFieldManager" class="com.doublechain.flowable.formfield.FormFieldManagerImpl" parent="formFieldManagerBase" ></bean>
+	
+	<bean id="formActionManagerBase" class="com.doublechain.flowable.formaction.FormActionManagerImpl"/>
+	<bean id="formActionManager" class="com.doublechain.flowable.formaction.FormActionManagerImpl" parent="formActionManagerBase" ></bean>
+	
+	<bean id="candidateContainerManagerBase" class="com.doublechain.flowable.candidatecontainer.CandidateContainerManagerImpl"/>
+	<bean id="candidateContainerManager" class="com.doublechain.flowable.candidatecontainer.CandidateContainerManagerImpl" parent="candidateContainerManagerBase" ></bean>
+	
+	<bean id="candidateElementManagerBase" class="com.doublechain.flowable.candidateelement.CandidateElementManagerImpl"/>
+	<bean id="candidateElementManager" class="com.doublechain.flowable.candidateelement.CandidateElementManagerImpl" parent="candidateElementManagerBase" ></bean>
+	
+	<bean id="wechatWorkappIdentifyManagerBase" class="com.doublechain.flowable.wechatworkappidentify.WechatWorkappIdentifyManagerImpl"/>
+	<bean id="wechatWorkappIdentifyManager" class="com.doublechain.flowable.wechatworkappidentify.WechatWorkappIdentifyManagerImpl" parent="wechatWorkappIdentifyManagerBase" ></bean>
+	
+	<bean id="wechatMiniappIdentifyManagerBase" class="com.doublechain.flowable.wechatminiappidentify.WechatMiniappIdentifyManagerImpl"/>
+	<bean id="wechatMiniappIdentifyManager" class="com.doublechain.flowable.wechatminiappidentify.WechatMiniappIdentifyManagerImpl" parent="wechatMiniappIdentifyManagerBase" ></bean>
+	
+
+	<bean id="managerGroupBase" class="com.doublechain.flowable.ManagerGroup">
+		<property name="platformManager" ref="platformManager"/>
+		<property name="userManager" ref="userManager"/>
+		<property name="roleManager" ref="roleManager"/>
+		<property name="leaveRecordManager" ref="leaveRecordManager"/>
+		<property name="leaveRecordTypeManager" ref="leaveRecordTypeManager"/>
+		<property name="holydaySettingManager" ref="holydaySettingManager"/>
+		<property name="provinceManager" ref="provinceManager"/>
+		<property name="cityManager" ref="cityManager"/>
+		<property name="districtManager" ref="districtManager"/>
+		<property name="userDomainManager" ref="userDomainManager"/>
+		<property name="userWhiteListManager" ref="userWhiteListManager"/>
+		<property name="secUserManager" ref="secUserManager"/>
+		<property name="userAppManager" ref="userAppManager"/>
+		<property name="quickLinkManager" ref="quickLinkManager"/>
+		<property name="listAccessManager" ref="listAccessManager"/>
+		<property name="objectAccessManager" ref="objectAccessManager"/>
+		<property name="loginHistoryManager" ref="loginHistoryManager"/>
+		<property name="genericFormManager" ref="genericFormManager"/>
+		<property name="formMessageManager" ref="formMessageManager"/>
+		<property name="formFieldMessageManager" ref="formFieldMessageManager"/>
+		<property name="formFieldManager" ref="formFieldManager"/>
+		<property name="formActionManager" ref="formActionManager"/>
+		<property name="candidateContainerManager" ref="candidateContainerManager"/>
+		<property name="candidateElementManager" ref="candidateElementManager"/>
+		<property name="wechatWorkappIdentifyManager" ref="wechatWorkappIdentifyManager"/>
+		<property name="wechatMiniappIdentifyManager" ref="wechatMiniappIdentifyManager"/>
+	</bean>
+	<bean id="managerGroup" parent="managerGroupBase"></bean>
+	
+
+
+</beans>
+
+
+
+
+

@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
+    }
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.2.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'eclipse'
+
+
+group = 'com.doublechain'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//implementation 'org.springframework.boot:spring-boot-starter'
+compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.4'
+	compile 'org.flowable:flowable-spring-boot-starter:6.4.2'
+    compile ('org.flowable:flowable-ui-modeler-app:6.4.2'){
+        exclude group: 'org.slf4j'
+        exclude group: 'org.log4j'
+    } 
+
+    
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+
+	runtimeOnly 'mysql:mysql-connector-java'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+
+bootRun {
+    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006"
+}

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- Enable Annotation based Declarative Transaction Management -->
+
+
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+  	  <property name="poolName" value="flowable_connection_pool" />
+  	  <property name="dataSourceClassName" value="${app.database.dataSourceClassName}"/>
+  	  <property name="maximumPoolSize" value="10" />
+  	  <property name="maxLifetime" value="60000" />
+  	  <property name="idleTimeout" value="30000" />
+  	  <property name="dataSourceProperties">
+  	   <props>
+  	     <prop key="url">${app.database.jdbcURL}</prop>
+  	     <prop key="user">${app.database.username}</prop>
+  	     <prop key="password">${app.database.password}</prop>
+  	   </props>
+  	  </property>
+  	</bean>
+
+
+	<!-- dbcp 2.6 https://commons.apache.org/proper/commons-dbcp/configuration.html
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	  <property name="poolName" value="flowable_connection_pool" />
+	  <property name="dataSourceClassName" value="${app.database.dataSourceClassName}"/>
+	  <property name="maximumPoolSize" value="10" />
+	  <property name="maxLifetime" value="60000" />
+	  <property name="idleTimeout" value="30000" />
+	  <property name="dataSourceProperties">
+	   <props>
+	     <prop key="url">${app.database.jdbcURL}</prop>
+	     <prop key="user">${app.database.username}</prop>
+	     <prop key="password">${app.database.password}</prop>
+	     <prop key="prepStmtCacheSize">250</prop>
+	     <prop key="prepStmtCacheSqlLimit">2048</prop>
+	     <prop key="cachePrepStmts">true</prop>
+	     <prop key="useServerPrepStmts">true</prop>
+	   </props>
+	  </property>
+	</bean>
+	-->
+
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	  <constructor-arg ref="hikariConfig" />
+	</bean>
+
+
+	<bean id="platformDAOBase" class="com.doublechain.flowable.platform.PlatformJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="leaveRecordDAO" ref="leaveRecordDAO" />
+		
+		<property name="provinceDAO" ref="provinceDAO" />
+		
+		<property name="cityDAO" ref="cityDAO" />
+		
+		<property name="districtDAO" ref="districtDAO" />
+		
+	</bean>
+	<bean id="platformDAO" parent="platformDAOBase"></bean>
+	
+
+	<bean id="userDAOBase" class="com.doublechain.flowable.user.UserJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="districtDAO" ref="districtDAO" /><property name="roleDAO" ref="roleDAO" />
+		<property name="leaveRecordDAO" ref="leaveRecordDAO" />
+		
+	</bean>
+	<bean id="userDAO" parent="userDAOBase"></bean>
+	
+
+	<bean id="roleDAOBase" class="com.doublechain.flowable.role.RoleJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="userDAO" ref="userDAO" />
+		
+	</bean>
+	<bean id="roleDAO" parent="roleDAOBase"></bean>
+	
+
+	<bean id="leaveRecordDAOBase" class="com.doublechain.flowable.leaverecord.LeaveRecordJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDAO" ref="userDAO" /><property name="leaveRecordTypeDAO" ref="leaveRecordTypeDAO" /><property name="platformDAO" ref="platformDAO" />
+	</bean>
+	<bean id="leaveRecordDAO" parent="leaveRecordDAOBase"></bean>
+	
+
+	<bean id="leaveRecordTypeDAOBase" class="com.doublechain.flowable.leaverecordtype.LeaveRecordTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="leaveRecordDAO" ref="leaveRecordDAO" />
+		
+		<property name="holydaySettingDAO" ref="holydaySettingDAO" />
+		
+	</bean>
+	<bean id="leaveRecordTypeDAO" parent="leaveRecordTypeDAOBase"></bean>
+	
+
+	<bean id="holydaySettingDAOBase" class="com.doublechain.flowable.holydaysetting.HolydaySettingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="leaveRecordTypeDAO" ref="leaveRecordTypeDAO" />
+	</bean>
+	<bean id="holydaySettingDAO" parent="holydaySettingDAOBase"></bean>
+	
+
+	<bean id="provinceDAOBase" class="com.doublechain.flowable.province.ProvinceJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="platformDAO" ref="platformDAO" />
+		<property name="cityDAO" ref="cityDAO" />
+		
+	</bean>
+	<bean id="provinceDAO" parent="provinceDAOBase"></bean>
+	
+
+	<bean id="cityDAOBase" class="com.doublechain.flowable.city.CityJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="provinceDAO" ref="provinceDAO" /><property name="platformDAO" ref="platformDAO" />
+		<property name="districtDAO" ref="districtDAO" />
+		
+	</bean>
+	<bean id="cityDAO" parent="cityDAOBase"></bean>
+	
+
+	<bean id="districtDAOBase" class="com.doublechain.flowable.district.DistrictJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="cityDAO" ref="cityDAO" /><property name="platformDAO" ref="platformDAO" />
+		<property name="userDAO" ref="userDAO" />
+		
+	</bean>
+	<bean id="districtDAO" parent="districtDAOBase"></bean>
+	
+
+	<bean id="userDomainDAOBase" class="com.doublechain.flowable.userdomain.UserDomainJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="userWhiteListDAO" ref="userWhiteListDAO" />
+		
+		<property name="secUserDAO" ref="secUserDAO" />
+		
+	</bean>
+	<bean id="userDomainDAO" parent="userDomainDAOBase"></bean>
+	
+
+	<bean id="userWhiteListDAOBase" class="com.doublechain.flowable.userwhitelist.UserWhiteListJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDomainDAO" ref="userDomainDAO" />
+	</bean>
+	<bean id="userWhiteListDAO" parent="userWhiteListDAOBase"></bean>
+	
+
+	<bean id="secUserDAOBase" class="com.doublechain.flowable.secuser.SecUserJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDomainDAO" ref="userDomainDAO" />
+		<property name="userAppDAO" ref="userAppDAO" />
+		
+		<property name="loginHistoryDAO" ref="loginHistoryDAO" />
+		
+		<property name="wechatWorkappIdentifyDAO" ref="wechatWorkappIdentifyDAO" />
+		
+		<property name="wechatMiniappIdentifyDAO" ref="wechatMiniappIdentifyDAO" />
+		
+	</bean>
+	<bean id="secUserDAO" parent="secUserDAOBase"></bean>
+	
+
+	<bean id="userAppDAOBase" class="com.doublechain.flowable.userapp.UserAppJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+		<property name="quickLinkDAO" ref="quickLinkDAO" />
+		
+		<property name="listAccessDAO" ref="listAccessDAO" />
+		
+		<property name="objectAccessDAO" ref="objectAccessDAO" />
+		
+	</bean>
+	<bean id="userAppDAO" parent="userAppDAOBase"></bean>
+	
+
+	<bean id="quickLinkDAOBase" class="com.doublechain.flowable.quicklink.QuickLinkJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>
+	<bean id="quickLinkDAO" parent="quickLinkDAOBase"></bean>
+	
+
+	<bean id="listAccessDAOBase" class="com.doublechain.flowable.listaccess.ListAccessJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>
+	<bean id="listAccessDAO" parent="listAccessDAOBase"></bean>
+	
+
+	<bean id="objectAccessDAOBase" class="com.doublechain.flowable.objectaccess.ObjectAccessJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>
+	<bean id="objectAccessDAO" parent="objectAccessDAOBase"></bean>
+	
+
+	<bean id="loginHistoryDAOBase" class="com.doublechain.flowable.loginhistory.LoginHistoryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="loginHistoryDAO" parent="loginHistoryDAOBase"></bean>
+	
+
+	<bean id="genericFormDAOBase" class="com.doublechain.flowable.genericform.GenericFormJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="formMessageDAO" ref="formMessageDAO" />
+		
+		<property name="formFieldMessageDAO" ref="formFieldMessageDAO" />
+		
+		<property name="formFieldDAO" ref="formFieldDAO" />
+		
+		<property name="formActionDAO" ref="formActionDAO" />
+		
+	</bean>
+	<bean id="genericFormDAO" parent="genericFormDAOBase"></bean>
+	
+
+	<bean id="formMessageDAOBase" class="com.doublechain.flowable.formmessage.FormMessageJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formMessageDAO" parent="formMessageDAOBase"></bean>
+	
+
+	<bean id="formFieldMessageDAOBase" class="com.doublechain.flowable.formfieldmessage.FormFieldMessageJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formFieldMessageDAO" parent="formFieldMessageDAOBase"></bean>
+	
+
+	<bean id="formFieldDAOBase" class="com.doublechain.flowable.formfield.FormFieldJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formFieldDAO" parent="formFieldDAOBase"></bean>
+	
+
+	<bean id="formActionDAOBase" class="com.doublechain.flowable.formaction.FormActionJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formActionDAO" parent="formActionDAOBase"></bean>
+	
+
+	<bean id="candidateContainerDAOBase" class="com.doublechain.flowable.candidatecontainer.CandidateContainerJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="candidateElementDAO" ref="candidateElementDAO" />
+		
+	</bean>
+	<bean id="candidateContainerDAO" parent="candidateContainerDAOBase"></bean>
+	
+
+	<bean id="candidateElementDAOBase" class="com.doublechain.flowable.candidateelement.CandidateElementJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="candidateContainerDAO" ref="candidateContainerDAO" />
+	</bean>
+	<bean id="candidateElementDAO" parent="candidateElementDAOBase"></bean>
+	
+
+	<bean id="wechatWorkappIdentifyDAOBase" class="com.doublechain.flowable.wechatworkappidentify.WechatWorkappIdentifyJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="wechatWorkappIdentifyDAO" parent="wechatWorkappIdentifyDAOBase"></bean>
+	
+
+	<bean id="wechatMiniappIdentifyDAOBase" class="com.doublechain.flowable.wechatminiappidentify.WechatMiniappIdentifyJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="wechatMiniappIdentifyDAO" parent="wechatMiniappIdentifyDAOBase"></bean>
+	
+
+
+	<bean id="DAOGroupBase" class="com.doublechain.flowable.DAOGroup">
+		<property name="platformDAO" ref="platformDAO"/>
+		<property name="userDAO" ref="userDAO"/>
+		<property name="roleDAO" ref="roleDAO"/>
+		<property name="leaveRecordDAO" ref="leaveRecordDAO"/>
+		<property name="leaveRecordTypeDAO" ref="leaveRecordTypeDAO"/>
+		<property name="holydaySettingDAO" ref="holydaySettingDAO"/>
+		<property name="provinceDAO" ref="provinceDAO"/>
+		<property name="cityDAO" ref="cityDAO"/>
+		<property name="districtDAO" ref="districtDAO"/>
+		<property name="userDomainDAO" ref="userDomainDAO"/>
+		<property name="userWhiteListDAO" ref="userWhiteListDAO"/>
+		<property name="secUserDAO" ref="secUserDAO"/>
+		<property name="userAppDAO" ref="userAppDAO"/>
+		<property name="quickLinkDAO" ref="quickLinkDAO"/>
+		<property name="listAccessDAO" ref="listAccessDAO"/>
+		<property name="objectAccessDAO" ref="objectAccessDAO"/>
+		<property name="loginHistoryDAO" ref="loginHistoryDAO"/>
+		<property name="genericFormDAO" ref="genericFormDAO"/>
+		<property name="formMessageDAO" ref="formMessageDAO"/>
+		<property name="formFieldMessageDAO" ref="formFieldMessageDAO"/>
+		<property name="formFieldDAO" ref="formFieldDAO"/>
+		<property name="formActionDAO" ref="formActionDAO"/>
+		<property name="candidateContainerDAO" ref="candidateContainerDAO"/>
+		<property name="candidateElementDAO" ref="candidateElementDAO"/>
+		<property name="wechatWorkappIdentifyDAO" ref="wechatWorkappIdentifyDAO"/>
+		<property name="wechatMiniappIdentifyDAO" ref="wechatMiniappIdentifyDAO"/>
+	</bean>
+	<bean id="DAOGroup" parent="DAOGroupBase"></bean>
+</beans>
+
+
+
+
+<!--
+
+	各种候选配置，可以选择你更为熟悉的类型
+	Creating TransactionManager Bean, since JDBC we are creating of type
+		DataSourceTransactionManager
+
+		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	  <property name="poolName" value="mercatus_connection_pool" />
+	  <property name="dataSourceClassName" value="com.mysql.cj.jdbc.MysqlDataSource"/>
+	  <property name="maximumPoolSize" value="50" />
+	  <property name="maxLifetime" value="60000" />
+	  <property name="idleTimeout" value="30000" />
+	  <property name="dataSourceProperties">
+	   <props>
+	     <prop key="url">${app.database.jdbcURL}</prop>
+	     <prop key="user">${app.database.username}</prop>
+	     <prop key="password">${app.database.password}</prop>
+	     <prop key="prepStmtCacheSize">250</prop>
+	     <prop key="prepStmtCacheSqlLimit">2048</prop>
+	     <prop key="cachePrepStmts">true</prop>
+	     <prop key="useServerPrepStmts">true</prop>
+	   </props>
+	  </property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+
+		<property name="url" value="${app.database.jdbcURL}" />
+		<property name="username" value="${app.database.username}" />
+		<property name="password" value="${app.database.password}" />
+		<property name="driverClassName" value="${app.database.driverClass}" />
+		<property name="initialSize" value="${app.database.pool.initialSize}" />
+		<property name="maxTotal" value="${app.database.pool.maxActive}" />
+
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery" value="SELECT 1 from sec_user_data" />
+		<property name="removeAbandonedTimeout" value="55" />
+		<property name="removeAbandonedOnBorrow" value="true"/>
+
+	</bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" >
+
+		<property name="jdbcUrl" value="${app.database.jdbcURL}" />
+		<property name="user" value="${app.database.username}" />
+		<property name="password" value="${app.database.password}" />
+		<property name="driverClass" value="${app.database.driverClass}" />
+
+  		<property name="minPoolSize" value="10"/>
+  		<property name="maxPoolSize" value="50"/>
+  		<property name="acquireIncrement" value="1"/>
+  		<property name="idleConnectionTestPeriod" value="1000"/>
+  		<property name="maxStatements" value="250"/>
+  		<property name="checkoutTimeout" value="60000"/>
+  		<property name="initialPoolSize" value="10" />
+
+	</bean>
+
+
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	  <property name="poolName" value="mercatus_connection_pool" />
+	  <property name="dataSourceClassName" value="${app.database.dataSourceClassName}"/>
+	  <property name="maximumPoolSize" value="50" />
+	  <property name="maxLifetime" value="60000" />
+	  <property name="idleTimeout" value="30000" />
+	  <property name="dataSourceProperties">
+	   <props>
+	     <prop key="url">${app.database.jdbcURL}</prop>
+	     <prop key="user">${app.database.username}</prop>
+	     <prop key="password">${app.database.password}</prop>
+	     <prop key="prepStmtCacheSize">250</prop>
+	     <prop key="prepStmtCacheSqlLimit">2048</prop>
+	     <prop key="cachePrepStmts">true</prop>
+	     <prop key="useServerPrepStmts">true</prop>
+	   </props>
+	  </property>
+	</bean>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	  <constructor-arg ref="hikariConfig" />
+	</bean>
+
+
+-->
+
+
+
+
+
+
+
+
