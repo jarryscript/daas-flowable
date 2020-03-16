@@ -20,7 +20,7 @@ const testValues = {};
 const testValues = {
   openId: 'wechat_open_id_1234567890',
   appId: 'wechat_miniapp_id_1234567890',
-  lastLoginTime: '2020-02-01 15:08:28',
+  lastLoginTime: '2020-02-16 19:51:27',
   secUserId: 'SU000001',
 }
 */

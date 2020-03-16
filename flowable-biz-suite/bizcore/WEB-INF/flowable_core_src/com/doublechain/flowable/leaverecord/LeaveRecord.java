@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.SmartList;
 import com.doublechain.flowable.KeyValuePair;
@@ -98,6 +99,7 @@ public class LeaveRecord extends BaseEntity implements  java.io.Serializable{
     
     
 	protected void changeFromdateProperty(String newValueExpr){
+	
 		Date oldValue = getFromdate();
 		Date newValue = parseDate(newValueExpr);
 		if(equalsDate(oldValue , newValue)){
@@ -107,12 +109,13 @@ public class LeaveRecord extends BaseEntity implements  java.io.Serializable{
 		updateFromdate(newValue);
 		this.onChangeProperty(FROMDATE_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			
 			
 	protected void changeTodateProperty(String newValueExpr){
+	
 		Date oldValue = getTodate();
 		Date newValue = parseDate(newValueExpr);
 		if(equalsDate(oldValue , newValue)){
@@ -122,7 +125,7 @@ public class LeaveRecord extends BaseEntity implements  java.io.Serializable{
 		updateTodate(newValue);
 		this.onChangeProperty(TODATE_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			

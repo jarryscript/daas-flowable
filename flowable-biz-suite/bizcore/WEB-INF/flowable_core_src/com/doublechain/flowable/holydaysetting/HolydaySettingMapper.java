@@ -27,7 +27,9 @@ public class HolydaySettingMapper extends BaseRowMapper<HolydaySetting>{
 	protected void setId(HolydaySetting holydaySetting, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String id = rs.getString(HolydaySettingTable.COLUMN_ID);
+		
 		if(id == null){
 			//do nothing when nothing found in database
 			return;
@@ -57,7 +59,9 @@ public class HolydaySettingMapper extends BaseRowMapper<HolydaySetting>{
 	protected void setLeaveDays(HolydaySetting holydaySetting, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Integer leaveDays = rs.getInt(HolydaySettingTable.COLUMN_LEAVE_DAYS);
+		
 		if(leaveDays == null){
 			//do nothing when nothing found in database
 			return;
@@ -69,7 +73,9 @@ public class HolydaySettingMapper extends BaseRowMapper<HolydaySetting>{
 	protected void setVersion(HolydaySetting holydaySetting, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Integer version = rs.getInt(HolydaySettingTable.COLUMN_VERSION);
+		
 		if(version == null){
 			//do nothing when nothing found in database
 			return;

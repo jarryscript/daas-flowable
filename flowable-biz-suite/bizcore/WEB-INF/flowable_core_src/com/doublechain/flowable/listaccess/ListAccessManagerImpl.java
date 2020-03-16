@@ -3,11 +3,13 @@ package com.doublechain.flowable.listaccess;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -224,25 +226,46 @@ public class ListAccessManagerImpl extends CustomFlowableCheckerManager implemen
 		
 
 		if(ListAccess.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfListAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ListAccess.INTERNAL_NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkInternalNameOfListAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ListAccess.READ_PERMISSION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkReadPermissionOfListAccess(parseBoolean(newValueExpr));
+		
+			
 		}
 		if(ListAccess.CREATE_PERMISSION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkCreatePermissionOfListAccess(parseBoolean(newValueExpr));
+		
+			
 		}
 		if(ListAccess.DELETE_PERMISSION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDeletePermissionOfListAccess(parseBoolean(newValueExpr));
+		
+			
 		}
 		if(ListAccess.UPDATE_PERMISSION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkUpdatePermissionOfListAccess(parseBoolean(newValueExpr));
+		
+			
 		}
 		if(ListAccess.EXECUTION_PERMISSION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkExecutionPermissionOfListAccess(parseBoolean(newValueExpr));
+		
+			
 		}		
 
 		
@@ -600,6 +623,42 @@ public class ListAccessManagerImpl extends CustomFlowableCheckerManager implemen
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<ListAccess> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<UserApp> appList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, UserApp.class);
+		userContext.getDAOGroup().enhanceList(appList, UserApp.class);
+
+	
+    }
+	
+	public Object listByApp(FlowableUserContext userContext,String appId) throws Exception {
+		return listPageByApp(userContext, appId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByApp(FlowableUserContext userContext,String appId, int start, int count) throws Exception {
+		SmartList<ListAccess> list = listAccessDaoOf(userContext).findListAccessByApp(appId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(ListAccess.class);
+		page.setContainerObject(UserApp.withId(appId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("应用程序列表");
+		page.setRequestName("listByApp");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByApp");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

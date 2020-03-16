@@ -1,2 +1,5 @@
-/application.properties
+/cla/
 /com/
+/org/
+/static/
+/stencilset_bpmn.json

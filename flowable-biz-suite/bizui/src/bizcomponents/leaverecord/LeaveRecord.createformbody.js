@@ -17,8 +17,8 @@ const {fieldLabels} = LeaveRecordBase
 const testValues = {};
 /*
 const testValues = {
-  fromdate: '2017-06-18',
-  todate: '2019-07-07',
+  fromdate: '2017-03-18',
+  todate: '2017-08-10',
   userId: 'U000001',
   typeId: 'ANNUAL_LEAVE',
   platformId: 'P000001',

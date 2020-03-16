@@ -1,5 +1,4 @@
 
-
 /*
 
 这里面放置你需要定制的行为，可以增加方法，也可以重写原来的方法，主要是增加新的约束和关联。
@@ -10,16 +9,24 @@
 
 */
 
-
 package com.doublechain.flowable.role;
-import java.util.Date;
+
 import com.doublechain.flowable.FlowableUserContext;
+import com.doublechain.flowable.MultipleAccessKey;
+import com.terapico.uccaf.BaseUserContext;
 
-public class RoleCustomManagerImpl extends RoleManagerImpl{
+public class RoleCustomManagerImpl extends RoleManagerImpl {
 
+	@Override
+	public Object checkAccess(BaseUserContext baseUserContext, String methodName, Object[] parameters) throws IllegalAccessException {
+		return null;
+	}
 
-
-
+	public Object viewByName(FlowableUserContext userContext, String name) throws Exception {
+		userContext.forceRenderingAsJson();
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(Role.NAME_PROPERTY, name);
+		return daoOf(userContext).findRoleWithKey(key, RoleTokens.empty());
+	}
 
 }
-

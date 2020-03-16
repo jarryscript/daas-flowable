@@ -636,11 +636,21 @@ public class UserJDBCTemplateDAO extends FlowableBaseDAOImpl implements UserDAO{
  	protected Object[] prepareUserUpdateParameters(User user){
  		Object[] parameters = new Object[10];
  
+ 		
  		parameters[0] = user.getName();
+ 		
+ 		
  		parameters[1] = user.getMobile();
+ 		
+ 		
  		parameters[2] = user.getAvatar();
+ 		
+ 		
  		parameters[3] = user.getAge();
- 		parameters[4] = user.getDescription(); 	
+ 		
+ 		
+ 		parameters[4] = user.getDescription();
+ 		 	
  		if(user.getDistrict() != null){
  			parameters[5] = user.getDistrict().getId();
  		}
@@ -661,11 +671,21 @@ public class UserJDBCTemplateDAO extends FlowableBaseDAOImpl implements UserDAO{
 		user.setId(newUserId);
 		parameters[0] =  user.getId();
  
+ 		
  		parameters[1] = user.getName();
+ 		
+ 		
  		parameters[2] = user.getMobile();
+ 		
+ 		
  		parameters[3] = user.getAvatar();
+ 		
+ 		
  		parameters[4] = user.getAge();
- 		parameters[5] = user.getDescription(); 	
+ 		
+ 		
+ 		parameters[5] = user.getDescription();
+ 		 	
  		if(user.getDistrict() != null){
  			parameters[6] = user.getDistrict().getId();
  		

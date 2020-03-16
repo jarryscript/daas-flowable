@@ -21,7 +21,7 @@ const testValues = {
   name: '王大锤',
   mobile: '13987654321',
   avatar: 'image()',
-  age: '19',
+  age: '22',
   districtId: 'D000001',
   roleId: 'EMPLOYEE',
   description: '    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n',

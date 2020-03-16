@@ -3,11 +3,13 @@ package com.doublechain.flowable.leaverecordtype;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -226,10 +228,16 @@ public class LeaveRecordTypeManagerImpl extends CustomFlowableCheckerManager imp
 		
 
 		if(LeaveRecordType.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfLeaveRecordType(parseString(newValueExpr));
+		
+			
 		}
 		if(LeaveRecordType.CODE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkCodeOfLeaveRecordType(parseString(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(LeaveRecordTypeManagerException.class);
@@ -622,11 +630,15 @@ public class LeaveRecordTypeManagerImpl extends CustomFlowableCheckerManager imp
 		
 
 		if(LeaveRecord.FROMDATE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkFromdateOfLeaveRecord(parseDate(newValueExpr));
+		
 		}
 		
 		if(LeaveRecord.TODATE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTodateOfLeaveRecord(parseDate(newValueExpr));
+		
 		}
 		
 	
@@ -856,7 +868,9 @@ public class LeaveRecordTypeManagerImpl extends CustomFlowableCheckerManager imp
 		
 
 		if(HolydaySetting.LEAVE_DAYS_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLeaveDaysOfHolydaySetting(parseInt(newValueExpr));
+		
 		}
 		
 	
@@ -1043,6 +1057,18 @@ public class LeaveRecordTypeManagerImpl extends CustomFlowableCheckerManager imp
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<LeaveRecordType> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+
+	
+    }
+	
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

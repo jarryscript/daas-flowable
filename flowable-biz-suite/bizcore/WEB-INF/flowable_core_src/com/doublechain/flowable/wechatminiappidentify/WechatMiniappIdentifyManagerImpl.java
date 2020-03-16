@@ -3,11 +3,13 @@ package com.doublechain.flowable.wechatminiappidentify;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -217,15 +219,24 @@ public class WechatMiniappIdentifyManagerImpl extends CustomFlowableCheckerManag
 		
 
 		if(WechatMiniappIdentify.OPEN_ID_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkOpenIdOfWechatMiniappIdentify(parseString(newValueExpr));
+		
+			
 		}
 		if(WechatMiniappIdentify.APP_ID_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkAppIdOfWechatMiniappIdentify(parseString(newValueExpr));
+		
+			
 		}		
 
 		
 		if(WechatMiniappIdentify.LAST_LOGIN_TIME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLastLoginTimeOfWechatMiniappIdentify(parseTimestamp(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(WechatMiniappIdentifyManagerException.class);
@@ -683,7 +694,44 @@ public class WechatMiniappIdentifyManagerImpl extends CustomFlowableCheckerManag
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<WechatMiniappIdentify> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<SecUser> secUserList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, SecUser.class);
+		userContext.getDAOGroup().enhanceList(secUserList, SecUser.class);
+
+	
+    }
+	
+	public Object listBySecUser(FlowableUserContext userContext,String secUserId) throws Exception {
+		return listPageBySecUser(userContext, secUserId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageBySecUser(FlowableUserContext userContext,String secUserId, int start, int count) throws Exception {
+		SmartList<WechatMiniappIdentify> list = wechatMiniappIdentifyDaoOf(userContext).findWechatMiniappIdentifyBySecUser(secUserId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(WechatMiniappIdentify.class);
+		page.setContainerObject(SecUser.withId(secUserId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("安全用户列表");
+		page.setRequestName("listBySecUser");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listBySecUser");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
+
 
 
 

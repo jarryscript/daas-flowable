@@ -1,5 +1,5 @@
 
--- BUILD WITH MODEL TIME 700101T0800
+-- BUILD WITH MODEL TIME 200220T0957
 -- Turn off safe mode
 SET SQL_SAFE_UPDATES = 0;
 
@@ -349,25 +349,25 @@ create table wechat_miniapp_identify_data (
 
 
 insert into platform_data values
-	('P000001','EHR','2020-02-11 01:29:32','1');
+	('P000001','EHR','2020-02-13 21:24:34','1');
 
 insert into user_data values
-	('U000001','王大锤','13987654321','image()','20','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000001','EMPLOYEE','1'),
-	('U000002','王大锤0002','13900000002','image()0002','18','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000001','EMPLOYEE','1'),
-	('U000003','王大锤0003','13900000003','image()0003','22','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000002','EMPLOYEE','1'),
-	('U000004','王大锤0004','13900000004','image()0004','24','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000002','EMPLOYEE','1'),
-	('U000005','王大锤0005','13900000005','image()0005','20','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000003','EMPLOYEE','1'),
-	('U000006','王大锤0006','13900000006','image()0006','21','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000003','EMPLOYEE','1'),
-	('U000007','王大锤0007','13900000007','image()0007','25','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000004','MANAGER','1'),
-	('U000008','王大锤0008','13900000008','image()0008','19','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000004','MANAGER','1'),
-	('U000009','王大锤0009','13900000009','image()0009','20','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000005','MANAGER','1'),
-	('U000010','王大锤0010','13900000010','image()0010','21','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000005','MANAGER','1'),
-	('U000011','王大锤0011','13900000011','image()0011','22','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000006','MANAGER','1'),
-	('U000012','王大锤0012','13900000012','image()0012','20','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000006','BOSS','1'),
-	('U000013','王大锤0013','13900000013','image()0013','24','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000007','BOSS','1'),
-	('U000014','王大锤0014','13900000014','image()0014','19','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000007','BOSS','1'),
-	('U000015','王大锤0015','13900000015','image()0015','22','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000008','BOSS','1'),
-	('U000016','王大锤0016','13900000016','image()0016','19','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000008','BOSS','1');
+	('U000001','王大锤','13987654321','image()','18','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000001','EMPLOYEE','1'),
+	('U000002','王大锤0002','13900000002','image()0002','19','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000001','EMPLOYEE','1'),
+	('U000003','王大锤0003','13900000003','image()0003','24','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000002','EMPLOYEE','1'),
+	('U000004','王大锤0004','13900000004','image()0004','19','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000002','EMPLOYEE','1'),
+	('U000005','王大锤0005','13900000005','image()0005','23','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000003','EMPLOYEE','1'),
+	('U000006','王大锤0006','13900000006','image()0006','19','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000003','EMPLOYEE','1'),
+	('U000007','王大锤0007','13900000007','image()0007','24','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000004','MANAGER','1'),
+	('U000008','王大锤0008','13900000008','image()0008','20','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000004','MANAGER','1'),
+	('U000009','王大锤0009','13900000009','image()0009','25','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000005','MANAGER','1'),
+	('U000010','王大锤0010','13900000010','image()0010','23','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000005','MANAGER','1'),
+	('U000011','王大锤0011','13900000011','image()0011','25','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000006','MANAGER','1'),
+	('U000012','王大锤0012','13900000012','image()0012','21','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000006','BOSS','1'),
+	('U000013','王大锤0013','13900000013','image()0013','25','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000007','BOSS','1'),
+	('U000014','王大锤0014','13900000014','image()0014','24','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000007','BOSS','1'),
+	('U000015','王大锤0015','13900000015','image()0015','23','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000008','BOSS','1'),
+	('U000016','王大锤0016','13900000016','image()0016','18','    一段样例文字。    一段样例文字。\n可以分段。可以分段。\n\n可以空行。可以空行。\n\n','D000008','BOSS','1');
 
 insert into role_data values
 	('EMPLOYEE','员工','EMPLOYEE','1'),
@@ -375,38 +375,38 @@ insert into role_data values
 	('BOSS','老板','BOSS','1');
 
 insert into leave_record_data values
-	('LR000001','U000001','ANNUAL_LEAVE','2018-04-25','2018-06-12','P000001','1'),
-	('LR000002','U000001','ANNUAL_LEAVE','2019-06-23','2020-02-08','P000001','1'),
-	('LR000003','U000002','ANNUAL_LEAVE','2019-04-24','2017-08-27','P000001','1'),
-	('LR000004','U000002','ANNUAL_LEAVE','2017-06-15','2017-09-26','P000001','1'),
-	('LR000005','U000003','ANNUAL_LEAVE','2019-03-30','2017-11-12','P000001','1'),
-	('LR000006','U000003','ANNUAL_LEAVE','2017-10-14','2017-05-29','P000001','1'),
-	('LR000007','U000004','ANNUAL_LEAVE','2019-09-27','2018-07-04','P000001','1'),
-	('LR000008','U000004','SICK_LEACK','2019-06-30','2017-10-19','P000001','1'),
-	('LR000009','U000005','SICK_LEACK','2019-11-30','2018-10-27','P000001','1'),
-	('LR000010','U000005','SICK_LEACK','2017-08-25','2018-04-04','P000001','1'),
-	('LR000011','U000006','SICK_LEACK','2017-12-24','2017-12-03','P000001','1'),
-	('LR000012','U000006','SICK_LEACK','2019-02-04','2019-11-11','P000001','1'),
-	('LR000013','U000007','SICK_LEACK','2018-10-21','2020-01-07','P000001','1'),
-	('LR000014','U000007','PERSONAL_LEAVE','2019-08-30','2018-01-24','P000001','1'),
-	('LR000015','U000008','PERSONAL_LEAVE','2018-05-12','2018-05-02','P000001','1'),
-	('LR000016','U000008','PERSONAL_LEAVE','2017-10-13','2019-07-22','P000001','1'),
-	('LR000017','U000009','PERSONAL_LEAVE','2017-05-28','2017-06-28','P000001','1'),
-	('LR000018','U000009','PERSONAL_LEAVE','2017-05-04','2020-01-22','P000001','1'),
-	('LR000019','U000010','PERSONAL_LEAVE','2019-06-05','2017-06-23','P000001','1'),
-	('LR000020','U000010','PERSONAL_LEAVE','2017-10-24','2018-02-08','P000001','1'),
-	('LR000021','U000011','MARRIAGE_HOLIDAY','2018-10-01','2017-08-11','P000001','1'),
-	('LR000022','U000011','MARRIAGE_HOLIDAY','2019-12-22','2017-09-24','P000001','1'),
-	('LR000023','U000012','MARRIAGE_HOLIDAY','2018-10-08','2020-02-01','P000001','1'),
-	('LR000024','U000012','MARRIAGE_HOLIDAY','2018-02-16','2019-05-25','P000001','1'),
-	('LR000025','U000013','MARRIAGE_HOLIDAY','2017-08-10','2019-12-24','P000001','1'),
-	('LR000026','U000013','MARRIAGE_HOLIDAY','2018-07-30','2018-04-02','P000001','1'),
-	('LR000027','U000014','MATERNITY_LEAVE','2019-01-20','2019-09-13','P000001','1'),
-	('LR000028','U000014','MATERNITY_LEAVE','2018-02-02','2019-02-26','P000001','1'),
-	('LR000029','U000015','MATERNITY_LEAVE','2017-04-21','2018-01-27','P000001','1'),
-	('LR000030','U000015','MATERNITY_LEAVE','2019-04-12','2017-08-11','P000001','1'),
-	('LR000031','U000016','MATERNITY_LEAVE','2018-02-09','2018-04-22','P000001','1'),
-	('LR000032','U000016','MATERNITY_LEAVE','2017-05-23','2018-12-21','P000001','1');
+	('LR000001','U000001','ANNUAL_LEAVE','2017-07-31','2018-04-13','P000001','1'),
+	('LR000002','U000001','ANNUAL_LEAVE','2018-03-15','2018-08-02','P000001','1'),
+	('LR000003','U000002','ANNUAL_LEAVE','2018-07-16','2019-11-22','P000001','1'),
+	('LR000004','U000002','ANNUAL_LEAVE','2019-10-21','2017-11-16','P000001','1'),
+	('LR000005','U000003','ANNUAL_LEAVE','2019-11-10','2018-03-22','P000001','1'),
+	('LR000006','U000003','ANNUAL_LEAVE','2018-03-31','2019-05-15','P000001','1'),
+	('LR000007','U000004','ANNUAL_LEAVE','2017-08-06','2017-07-03','P000001','1'),
+	('LR000008','U000004','SICK_LEACK','2020-01-19','2018-03-18','P000001','1'),
+	('LR000009','U000005','SICK_LEACK','2019-10-02','2018-12-07','P000001','1'),
+	('LR000010','U000005','SICK_LEACK','2017-03-07','2017-08-07','P000001','1'),
+	('LR000011','U000006','SICK_LEACK','2019-02-22','2017-09-09','P000001','1'),
+	('LR000012','U000006','SICK_LEACK','2018-08-06','2017-11-25','P000001','1'),
+	('LR000013','U000007','SICK_LEACK','2019-08-24','2018-08-08','P000001','1'),
+	('LR000014','U000007','PERSONAL_LEAVE','2019-03-14','2018-07-22','P000001','1'),
+	('LR000015','U000008','PERSONAL_LEAVE','2017-07-18','2017-06-24','P000001','1'),
+	('LR000016','U000008','PERSONAL_LEAVE','2017-10-17','2017-05-26','P000001','1'),
+	('LR000017','U000009','PERSONAL_LEAVE','2017-12-23','2019-08-08','P000001','1'),
+	('LR000018','U000009','PERSONAL_LEAVE','2018-07-20','2019-02-01','P000001','1'),
+	('LR000019','U000010','PERSONAL_LEAVE','2018-03-16','2019-07-20','P000001','1'),
+	('LR000020','U000010','PERSONAL_LEAVE','2017-10-18','2019-04-30','P000001','1'),
+	('LR000021','U000011','MARRIAGE_HOLIDAY','2017-08-10','2017-06-18','P000001','1'),
+	('LR000022','U000011','MARRIAGE_HOLIDAY','2017-09-25','2018-03-20','P000001','1'),
+	('LR000023','U000012','MARRIAGE_HOLIDAY','2017-12-17','2019-12-07','P000001','1'),
+	('LR000024','U000012','MARRIAGE_HOLIDAY','2018-01-03','2019-05-10','P000001','1'),
+	('LR000025','U000013','MARRIAGE_HOLIDAY','2019-10-01','2019-02-11','P000001','1'),
+	('LR000026','U000013','MARRIAGE_HOLIDAY','2018-09-20','2018-06-22','P000001','1'),
+	('LR000027','U000014','MATERNITY_LEAVE','2017-10-09','2020-02-08','P000001','1'),
+	('LR000028','U000014','MATERNITY_LEAVE','2017-10-20','2020-02-19','P000001','1'),
+	('LR000029','U000015','MATERNITY_LEAVE','2018-06-13','2018-07-30','P000001','1'),
+	('LR000030','U000015','MATERNITY_LEAVE','2018-02-25','2017-07-17','P000001','1'),
+	('LR000031','U000016','MATERNITY_LEAVE','2018-09-19','2017-06-28','P000001','1'),
+	('LR000032','U000016','MATERNITY_LEAVE','2019-05-22','2018-10-03','P000001','1');
 
 insert into leave_record_type_data values
 	('ANNUAL_LEAVE','年假','ANNUAL_LEAVE','1'),
@@ -416,8 +416,8 @@ insert into leave_record_type_data values
 	('MATERNITY_LEAVE','产假','MATERNITY_LEAVE','1');
 
 insert into holyday_setting_data values
-	('HS000001','ANNUAL_LEAVE','9','1'),
-	('HS000002','PERSONAL_LEAVE','9','1');
+	('HS000001','ANNUAL_LEAVE','10','1'),
+	('HS000002','PERSONAL_LEAVE','10','1');
 
 insert into province_data values
 	('P000001','四川','P000001','1'),
@@ -440,16 +440,16 @@ insert into district_data values
 	('D000008','海淀区','C000004','P000001','1');
 
 insert into wechat_workapp_identify_data values
-	('WWI000001','corporation123','user123','SU000001','2020-01-29 10:14:22','2020-02-10 01:57:52','1'),
-	('WWI000002','corporation1230002','user1230002','SU000001','2020-01-31 11:06:08','2020-01-28 05:24:12','1'),
-	('WWI000003','corporation1230003','user1230003','SU000002','2020-02-10 16:43:56','2020-01-29 15:36:28','1'),
-	('WWI000004','corporation1230004','user1230004','SU000002','2020-02-16 07:11:42','2020-02-06 04:55:51','1');
+	('WWI000001','corporation123','user123','SU000001','2020-01-30 13:37:49','2020-02-01 15:32:39','1'),
+	('WWI000002','corporation1230002','user1230002','SU000001','2020-02-11 08:21:38','2020-02-13 13:44:13','1'),
+	('WWI000003','corporation1230003','user1230003','SU000002','2020-02-08 04:07:18','2020-02-04 05:34:08','1'),
+	('WWI000004','corporation1230004','user1230004','SU000002','2020-02-20 04:27:33','2020-02-02 17:47:35','1');
 
 insert into wechat_miniapp_identify_data values
-	('WMI000001','wechat_open_id_1234567890','wechat_miniapp_id_1234567890','SU000001','2020-01-31 00:08:37','2020-02-11 18:36:16','1'),
-	('WMI000002','wechat_open_id_12345678900002','wechat_miniapp_id_12345678900002','SU000001','2020-01-31 22:36:43','2020-02-10 22:28:40','1'),
-	('WMI000003','wechat_open_id_12345678900003','wechat_miniapp_id_12345678900003','SU000002','2020-01-27 12:13:15','2020-02-11 05:12:36','1'),
-	('WMI000004','wechat_open_id_12345678900004','wechat_miniapp_id_12345678900004','SU000002','2020-02-08 20:46:14','2020-02-04 11:34:35','1');
+	('WMI000001','wechat_open_id_1234567890','wechat_miniapp_id_1234567890','SU000001','2020-02-13 03:01:16','2020-01-30 01:07:50','1'),
+	('WMI000002','wechat_open_id_12345678900002','wechat_miniapp_id_12345678900002','SU000001','2020-02-02 23:09:33','2020-02-15 15:00:32','1'),
+	('WMI000003','wechat_open_id_12345678900003','wechat_miniapp_id_12345678900003','SU000002','2020-02-19 01:02:43','2020-02-10 22:30:14','1'),
+	('WMI000004','wechat_open_id_12345678900004','wechat_miniapp_id_12345678900004','SU000002','2020-02-06 21:15:43','2020-02-16 18:14:24','1');
 
 
 
@@ -475,6 +475,54 @@ insert into user_app_data values('UA000002','我的账户','SU000001','lock',1,'
 insert into user_app_data values('UA000003','用户管理','SU000001','users',1,'MXWR','UserDomain','UD000001','/link/to/app','1');
 
 /* ------------------------------ generate users for all target od marked as user4all ------------------------------------------ */
+insert into sec_user_data values('SU000002','User000002','13900000002','1000002@qq.com','BB5210DAE99659C7164D7DBCFC51FB2D167D0DA372D58EF26A9F8533EEA2967C', 'weixin_openid_000002', 'weixin_appid_000002', 'jwt_token_000002' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000004','用户: 王大锤','SU000002','store',1,'MXWR','User','U000001','/link/to/app','1');
+insert into user_app_data values('UA000005','我的账户','SU000002','lock',1,'MXWR','SecUser','SU000002','/link/to/app','1');
+insert into sec_user_data values('SU000003','User000003','13900000003','1000003@qq.com','9D4104DF2774FDEAAE074CA35B052D8F664F4F99064C7BEAB0B589C2605C4EDA', 'weixin_openid_000003', 'weixin_appid_000003', 'jwt_token_000003' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000006','用户: 王大锤0002','SU000003','store',1,'MXWR','User','U000002','/link/to/app','1');
+insert into user_app_data values('UA000007','我的账户','SU000003','lock',1,'MXWR','SecUser','SU000003','/link/to/app','1');
+insert into sec_user_data values('SU000004','User000004','13900000004','1000004@qq.com','9B223EBD008D7B544A3A640739EBE47459D3A4C5296DDA00F594FAF60FE88B28', 'weixin_openid_000004', 'weixin_appid_000004', 'jwt_token_000004' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000008','用户: 王大锤0003','SU000004','store',1,'MXWR','User','U000003','/link/to/app','1');
+insert into user_app_data values('UA000009','我的账户','SU000004','lock',1,'MXWR','SecUser','SU000004','/link/to/app','1');
+insert into sec_user_data values('SU000005','User000005','13900000005','1000005@qq.com','AE5F93F319636A96963C06D035B97F004D18E61D80129EFEA331784A6E21DC5C', 'weixin_openid_000005', 'weixin_appid_000005', 'jwt_token_000005' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000010','用户: 王大锤0004','SU000005','store',1,'MXWR','User','U000004','/link/to/app','1');
+insert into user_app_data values('UA000011','我的账户','SU000005','lock',1,'MXWR','SecUser','SU000005','/link/to/app','1');
+insert into sec_user_data values('SU000006','User000006','13900000006','1000006@qq.com','5FBBDBEAD9F84D599E8819CEEA167854CDA0FFD8D297D17D12E4619CE76F3B55', 'weixin_openid_000006', 'weixin_appid_000006', 'jwt_token_000006' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000012','用户: 王大锤0005','SU000006','store',1,'MXWR','User','U000005','/link/to/app','1');
+insert into user_app_data values('UA000013','我的账户','SU000006','lock',1,'MXWR','SecUser','SU000006','/link/to/app','1');
+insert into sec_user_data values('SU000007','User000007','13900000007','1000007@qq.com','A9652F0D7C1ACCB421BAF55EB3E7286AFA8F591897F1AE4CEB6A76402CCBE803', 'weixin_openid_000007', 'weixin_appid_000007', 'jwt_token_000007' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000014','用户: 王大锤0006','SU000007','store',1,'MXWR','User','U000006','/link/to/app','1');
+insert into user_app_data values('UA000015','我的账户','SU000007','lock',1,'MXWR','SecUser','SU000007','/link/to/app','1');
+insert into sec_user_data values('SU000008','User000008','13900000008','1000008@qq.com','A4B83C2652CD6BECE5C7909576555B313078D7EE50AA028F26B8F0245C191B4B', 'weixin_openid_000008', 'weixin_appid_000008', 'jwt_token_000008' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000016','用户: 王大锤0007','SU000008','store',1,'MXWR','User','U000007','/link/to/app','1');
+insert into user_app_data values('UA000017','我的账户','SU000008','lock',1,'MXWR','SecUser','SU000008','/link/to/app','1');
+insert into sec_user_data values('SU000009','User000009','13900000009','1000009@qq.com','88F8AB5F153081C5AB21F5E5354B4EB14286EFB43CEA588ED1C73FE2B46B35C1', 'weixin_openid_000009', 'weixin_appid_000009', 'jwt_token_000009' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000018','用户: 王大锤0008','SU000009','store',1,'MXWR','User','U000008','/link/to/app','1');
+insert into user_app_data values('UA000019','我的账户','SU000009','lock',1,'MXWR','SecUser','SU000009','/link/to/app','1');
+insert into sec_user_data values('SU000010','User000010','13900000010','1000010@qq.com','EF8232ABB97CC3858F271527A1AA1452A33715A3AC48312A44B0940D5C948600', 'weixin_openid_000010', 'weixin_appid_000010', 'jwt_token_000010' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000020','用户: 王大锤0009','SU000010','store',1,'MXWR','User','U000009','/link/to/app','1');
+insert into user_app_data values('UA000021','我的账户','SU000010','lock',1,'MXWR','SecUser','SU000010','/link/to/app','1');
+insert into sec_user_data values('SU000011','User000011','13900000011','1000011@qq.com','FE7AF5D4F030CD575C117A73124FC39AB41528DFFC41D2CFBC1130E755694243', 'weixin_openid_000011', 'weixin_appid_000011', 'jwt_token_000011' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000022','用户: 王大锤0010','SU000011','store',1,'MXWR','User','U000010','/link/to/app','1');
+insert into user_app_data values('UA000023','我的账户','SU000011','lock',1,'MXWR','SecUser','SU000011','/link/to/app','1');
+insert into sec_user_data values('SU000012','User000012','13900000012','1000012@qq.com','999DD89E35807C62458F2D191D4F55548B49245EEC6E186FE9497EC867C40088', 'weixin_openid_000012', 'weixin_appid_000012', 'jwt_token_000012' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000024','用户: 王大锤0011','SU000012','store',1,'MXWR','User','U000011','/link/to/app','1');
+insert into user_app_data values('UA000025','我的账户','SU000012','lock',1,'MXWR','SecUser','SU000012','/link/to/app','1');
+insert into sec_user_data values('SU000013','User000013','13900000013','1000013@qq.com','0AE92E17166CBB59341836C218E92EF083058CC4E3108C5FD2FB904650013A69', 'weixin_openid_000013', 'weixin_appid_000013', 'jwt_token_000013' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000026','用户: 王大锤0012','SU000013','store',1,'MXWR','User','U000012','/link/to/app','1');
+insert into user_app_data values('UA000027','我的账户','SU000013','lock',1,'MXWR','SecUser','SU000013','/link/to/app','1');
+insert into sec_user_data values('SU000014','User000014','13900000014','1000014@qq.com','E79E64241204EB0FCE03C4BA0E315F21ECDB11D22264BE7B1AAD41D04D77A6D0', 'weixin_openid_000014', 'weixin_appid_000014', 'jwt_token_000014' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000028','用户: 王大锤0013','SU000014','store',1,'MXWR','User','U000013','/link/to/app','1');
+insert into user_app_data values('UA000029','我的账户','SU000014','lock',1,'MXWR','SecUser','SU000014','/link/to/app','1');
+insert into sec_user_data values('SU000015','User000015','13900000015','1000015@qq.com','1D858671B95062DAFE1D989C089188CC4EFDF3D5C45D8F24DD20BF3E352A3D9B', 'weixin_openid_000015', 'weixin_appid_000015', 'jwt_token_000015' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000030','用户: 王大锤0014','SU000015','store',1,'MXWR','User','U000014','/link/to/app','1');
+insert into user_app_data values('UA000031','我的账户','SU000015','lock',1,'MXWR','SecUser','SU000015','/link/to/app','1');
+insert into sec_user_data values('SU000016','User000016','13900000016','1000016@qq.com','14B1F5E667F8B6697C8A2952C3619D9AD82F846E5B32FD9F258918786B3ED519', 'weixin_openid_000016', 'weixin_appid_000016', 'jwt_token_000016' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000032','用户: 王大锤0015','SU000016','store',1,'MXWR','User','U000015','/link/to/app','1');
+insert into user_app_data values('UA000033','我的账户','SU000016','lock',1,'MXWR','SecUser','SU000016','/link/to/app','1');
+insert into sec_user_data values('SU000017','User000017','13900000017','1000017@qq.com','1A803C7096681FC2AA7C55C46A6A99D8089481B96997774EA5B1C785C8035010', 'weixin_openid_000017', 'weixin_appid_000017', 'jwt_token_000017' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',1);
+insert into user_app_data values('UA000034','用户: 王大锤0016','SU000017','store',1,'MXWR','User','U000016','/link/to/app','1');
+insert into user_app_data values('UA000035','我的账户','SU000017','lock',1,'MXWR','SecUser','SU000017','/link/to/app','1');
 
 
 -- no change request type found
@@ -694,7 +742,7 @@ insert into info_lines values( ' SSSSSSSSSSSSSSS       uuuuuuuu  uuuu    ccccccc
 
 select * from info_lines;
 /* start with data patch */
-/* The sql file is not found from: /home/philip/resin-3.1.12/webapps/sky/data-patch/flowable.sql */
+/* The sql file is not found from: /Users/jarryzhou/githome/web-code-generator/sky/data-patch/flowable.sql */
 -- no change request defined .
 -- turn on safe mode
 SET SQL_SAFE_UPDATES = 1;
@@ -719,7 +767,4 @@ http://patorjk.com/software/taag/#p=testall&h=0&v=0&f=Graceful&t=Success!
 +----------+---------------------------------+---------------------+--------+
 
 */
-
-
-
 

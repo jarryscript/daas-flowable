@@ -8,6 +8,11 @@ import org.flowable.ui.common.filter.FlowableCookieFilterRegistrationBean;
 import org.flowable.ui.common.properties.FlowableCommonAppProperties;
 import org.flowable.ui.common.service.idm.RemoteIdmService;
 import org.flowable.ui.modeler.conf.ApplicationConfiguration;
+import org.flowable.ui.modeler.properties.FlowableModelerAppProperties;
+import org.flowable.ui.modeler.rest.app.ModelsResource;
+import org.flowable.ui.modeler.rest.app.StencilSetResource;
+import org.flowable.ui.modeler.service.AppDefinitionPublishService;
+import org.flowable.ui.modeler.service.ModelServiceImpl;
 import org.flowable.ui.modeler.servlet.AppDispatcherServletConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +27,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.doublechain.flowable.rest.CustomAppDefinitionPublishService;
+import com.doublechain.flowable.rest.CustomModelsResource;
+import com.doublechain.flowable.rest.CustomStencilSetResource;
+import com.doublechain.flowable.service.CustomModelService;
+
 @Import({ ApplicationConfiguration.class, AppDispatcherServletConfiguration.class })
 
 @SpringBootApplication
@@ -34,14 +44,14 @@ public class FlowableApplication extends SpringBootServletInitializer {
 
 	/**
 	 * 重写 Flowable 的 FlowableCookieFilterRegistrationBean,跳过cookie认证
+	 *
 	 * @param remoteIdmService
 	 * @param properties
 	 * @return
 	 */
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
-	public FlowableCookieFilterRegistrationBean flowableCookieFilterRegistrationBean(RemoteIdmService remoteIdmService,
-			FlowableCommonAppProperties properties) {
+	public FlowableCookieFilterRegistrationBean flowableCookieFilterRegistrationBean(RemoteIdmService remoteIdmService, FlowableCommonAppProperties properties) {
 		return new FlowableCookieFilterRegistrationBean(remoteIdmService, properties) {
 			@Override
 			protected void initializeFilter() {
@@ -60,22 +70,43 @@ public class FlowableApplication extends SpringBootServletInitializer {
 
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
-    @ConditionalOnProperty(prefix = "flowable.idm.ldap", name = "enabled", havingValue = "false", matchIfMissing = true)
-    public AuthenticationProvider authenticationProvider() {
+	@ConditionalOnProperty(prefix = "flowable.idm.ldap", name = "enabled", havingValue = "false", matchIfMissing = true)
+	public AuthenticationProvider authenticationProvider() {
 		return new CustomFlowableAuthenticationProvider();
-    }
+	}
 
 	@EnableWebSecurity
 	@Order(Ordered.HIGHEST_PRECEDENCE)
-	public  class CustomFormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter{
+	public class CustomFormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.formLogin().and().authenticationProvider(authenticationProvider()).authorizeRequests().anyRequest().authenticated().and().csrf().disable();
 		}
 	}
+
 	@Bean
 	public RemoteIdmService remoteIdmService(FlowableCommonAppProperties properties) {
 		return new CustomRemoteIdmService(properties);
+	}
+
+	@Bean
+	public AppDefinitionPublishService appDefinitionPublishService(FlowableCommonAppProperties properties, FlowableModelerAppProperties modelerAppProperties) {
+		return new CustomAppDefinitionPublishService(properties, modelerAppProperties);
+	}
+
+	@Bean
+	public ModelServiceImpl modelServiceImpl() {
+		return new CustomModelService();
+	}
+
+	@Bean
+	public StencilSetResource stencilSetResource() {
+		return new CustomStencilSetResource();
+	}
+
+	@Bean
+	public ModelsResource modelsResource() {
+		return new CustomModelsResource();
 	}
 
 }

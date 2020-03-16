@@ -3,11 +3,13 @@ package com.doublechain.flowable.quicklink;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -219,16 +221,28 @@ public class QuickLinkManagerImpl extends CustomFlowableCheckerManager implement
 		
 
 		if(QuickLink.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfQuickLink(parseString(newValueExpr));
+		
+			
 		}
 		if(QuickLink.ICON_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkIconOfQuickLink(parseString(newValueExpr));
+		
+			
 		}
 		if(QuickLink.IMAGE_PATH_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkImagePathOfQuickLink(parseString(newValueExpr));
+		
+			
 		}
 		if(QuickLink.LINK_TARGET_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLinkTargetOfQuickLink(parseString(newValueExpr));
+		
+			
 		}		
 
 		
@@ -586,6 +600,42 @@ public class QuickLinkManagerImpl extends CustomFlowableCheckerManager implement
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<QuickLink> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<UserApp> appList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, UserApp.class);
+		userContext.getDAOGroup().enhanceList(appList, UserApp.class);
+
+	
+    }
+	
+	public Object listByApp(FlowableUserContext userContext,String appId) throws Exception {
+		return listPageByApp(userContext, appId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByApp(FlowableUserContext userContext,String appId, int start, int count) throws Exception {
+		SmartList<QuickLink> list = quickLinkDaoOf(userContext).findQuickLinkByApp(appId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(QuickLink.class);
+		page.setContainerObject(UserApp.withId(appId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("应用程序列表");
+		page.setRequestName("listByApp");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByApp");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

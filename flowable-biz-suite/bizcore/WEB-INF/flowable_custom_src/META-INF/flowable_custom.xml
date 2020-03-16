@@ -113,11 +113,31 @@
 	
 	</bean>
 	
+	<bean id="rest" class="com.doublechain.flowable.rest.RestViewBizService">
+	</bean>
 	
+	<bean id="notificationDelegate" class="com.doublechain.flowable.delegate.NotificationDelegate">
+	</bean>
+
+	<bean class="com.doublechain.flowable.delegate.TestDelegate" id="testDelegate">
+		<property name="test" value="${test}"/>
+	</bean>
 	
-
-
-
+	<bean class="com.doublechain.flowable.delegate.ExeListener" id="exeListener">
+	
+	</bean>
+	
+		<bean class="com.doublechain.flowable.delegate.ResultListener" id="resultListener">
+	
+	</bean>
+	<bean class="com.doublechain.flowable.delegate.AuditResultDelegate" id="auditResultDelegate">
+	
+	</bean>
+	
+	<bean class="com.doublechain.flowable.TestService" id="artworkAuctionService">
+	
+	</bean>
+	
 </beans>
 
 

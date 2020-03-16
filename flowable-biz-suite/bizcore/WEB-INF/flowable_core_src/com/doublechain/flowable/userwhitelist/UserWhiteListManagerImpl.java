@@ -3,11 +3,13 @@ package com.doublechain.flowable.userwhitelist;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -214,10 +216,16 @@ public class UserWhiteListManagerImpl extends CustomFlowableCheckerManager imple
 		
 
 		if(UserWhiteList.USER_IDENTITY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkUserIdentityOfUserWhiteList(parseString(newValueExpr));
+		
+			
 		}
 		if(UserWhiteList.USER_SPECIAL_FUNCTIONS_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkUserSpecialFunctionsOfUserWhiteList(parseString(newValueExpr));
+		
+			
 		}		
 
 		
@@ -575,6 +583,42 @@ public class UserWhiteListManagerImpl extends CustomFlowableCheckerManager imple
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<UserWhiteList> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<UserDomain> domainList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, UserDomain.class);
+		userContext.getDAOGroup().enhanceList(domainList, UserDomain.class);
+
+	
+    }
+	
+	public Object listByDomain(FlowableUserContext userContext,String domainId) throws Exception {
+		return listPageByDomain(userContext, domainId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByDomain(FlowableUserContext userContext,String domainId, int start, int count) throws Exception {
+		SmartList<UserWhiteList> list = userWhiteListDaoOf(userContext).findUserWhiteListByDomain(domainId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(UserWhiteList.class);
+		page.setContainerObject(UserDomain.withId(domainId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("域列表");
+		page.setRequestName("listByDomain");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByDomain");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

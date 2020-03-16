@@ -29,7 +29,9 @@ public class CityMapper extends BaseRowMapper<City>{
 	protected void setId(City city, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String id = rs.getString(CityTable.COLUMN_ID);
+		
 		if(id == null){
 			//do nothing when nothing found in database
 			return;
@@ -41,7 +43,9 @@ public class CityMapper extends BaseRowMapper<City>{
 	protected void setName(City city, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String name = rs.getString(CityTable.COLUMN_NAME);
+		
 		if(name == null){
 			//do nothing when nothing found in database
 			return;
@@ -89,7 +93,9 @@ public class CityMapper extends BaseRowMapper<City>{
 	protected void setVersion(City city, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Integer version = rs.getInt(CityTable.COLUMN_VERSION);
+		
 		if(version == null){
 			//do nothing when nothing found in database
 			return;

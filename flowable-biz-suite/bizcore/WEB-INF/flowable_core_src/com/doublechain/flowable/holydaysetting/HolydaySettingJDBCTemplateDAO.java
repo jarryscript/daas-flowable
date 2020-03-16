@@ -439,7 +439,9 @@ public class HolydaySettingJDBCTemplateDAO extends FlowableBaseDAOImpl implement
  			parameters[0] = holydaySetting.getType().getId();
  		}
  
- 		parameters[1] = holydaySetting.getLeaveDays();		
+ 		
+ 		parameters[1] = holydaySetting.getLeaveDays();
+ 				
  		parameters[2] = holydaySetting.nextVersion();
  		parameters[3] = holydaySetting.getId();
  		parameters[4] = holydaySetting.getVersion();
@@ -457,7 +459,9 @@ public class HolydaySettingJDBCTemplateDAO extends FlowableBaseDAOImpl implement
  		
  		}
  		
- 		parameters[2] = holydaySetting.getLeaveDays();		
+ 		
+ 		parameters[2] = holydaySetting.getLeaveDays();
+ 				
  				
  		return parameters;
  	}

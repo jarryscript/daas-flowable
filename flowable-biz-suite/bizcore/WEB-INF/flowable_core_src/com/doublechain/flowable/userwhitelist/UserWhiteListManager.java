@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.FlowableUserContext;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.BaseManager;
@@ -30,6 +31,9 @@ public interface UserWhiteListManager extends BaseManager{
 	
 
 
+	public Object listByDomain(FlowableUserContext userContext,String domainId) throws Exception;
+	public Object listPageByDomain(FlowableUserContext userContext,String domainId, int start, int count) throws Exception;
+  
 
 }
 

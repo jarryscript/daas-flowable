@@ -3,11 +3,13 @@ package com.doublechain.flowable.formaction;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -220,19 +222,34 @@ public class FormActionManagerImpl extends CustomFlowableCheckerManager implemen
 		
 
 		if(FormAction.LABEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLabelOfFormAction(parseString(newValueExpr));
+		
+			
 		}
 		if(FormAction.LOCALE_KEY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLocaleKeyOfFormAction(parseString(newValueExpr));
+		
+			
 		}
 		if(FormAction.ACTION_KEY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkActionKeyOfFormAction(parseString(newValueExpr));
+		
+			
 		}
 		if(FormAction.LEVEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLevelOfFormAction(parseString(newValueExpr));
+		
+			
 		}
 		if(FormAction.URL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkUrlOfFormAction(parseString(newValueExpr));
+		
+			
 		}		
 
 		
@@ -590,6 +607,42 @@ public class FormActionManagerImpl extends CustomFlowableCheckerManager implemen
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<FormAction> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<GenericForm> formList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, GenericForm.class);
+		userContext.getDAOGroup().enhanceList(formList, GenericForm.class);
+
+	
+    }
+	
+	public Object listByForm(FlowableUserContext userContext,String formId) throws Exception {
+		return listPageByForm(userContext, formId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByForm(FlowableUserContext userContext,String formId, int start, int count) throws Exception {
+		SmartList<FormAction> list = formActionDaoOf(userContext).findFormActionByForm(formId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(FormAction.class);
+		page.setContainerObject(GenericForm.withId(formId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("形式列表");
+		page.setRequestName("listByForm");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByForm");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

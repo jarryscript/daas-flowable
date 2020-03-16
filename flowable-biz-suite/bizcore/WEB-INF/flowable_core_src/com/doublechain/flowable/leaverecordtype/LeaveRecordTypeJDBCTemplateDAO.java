@@ -562,8 +562,12 @@ public class LeaveRecordTypeJDBCTemplateDAO extends FlowableBaseDAOImpl implemen
  	protected Object[] prepareLeaveRecordTypeUpdateParameters(LeaveRecordType leaveRecordType){
  		Object[] parameters = new Object[5];
  
+ 		
  		parameters[0] = leaveRecordType.getName();
- 		parameters[1] = leaveRecordType.getCode();		
+ 		
+ 		
+ 		parameters[1] = leaveRecordType.getCode();
+ 				
  		parameters[2] = leaveRecordType.nextVersion();
  		parameters[3] = leaveRecordType.getId();
  		parameters[4] = leaveRecordType.getVersion();
@@ -576,8 +580,12 @@ public class LeaveRecordTypeJDBCTemplateDAO extends FlowableBaseDAOImpl implemen
 		leaveRecordType.setId(newLeaveRecordTypeId);
 		parameters[0] =  leaveRecordType.getId();
  
+ 		
  		parameters[1] = leaveRecordType.getName();
- 		parameters[2] = leaveRecordType.getCode();		
+ 		
+ 		
+ 		parameters[2] = leaveRecordType.getCode();
+ 				
  				
  		return parameters;
  	}

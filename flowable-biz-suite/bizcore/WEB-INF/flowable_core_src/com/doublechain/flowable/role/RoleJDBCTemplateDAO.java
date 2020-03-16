@@ -462,8 +462,12 @@ public class RoleJDBCTemplateDAO extends FlowableBaseDAOImpl implements RoleDAO{
  	protected Object[] prepareRoleUpdateParameters(Role role){
  		Object[] parameters = new Object[5];
  
+ 		
  		parameters[0] = role.getName();
- 		parameters[1] = role.getCode();		
+ 		
+ 		
+ 		parameters[1] = role.getCode();
+ 				
  		parameters[2] = role.nextVersion();
  		parameters[3] = role.getId();
  		parameters[4] = role.getVersion();
@@ -476,8 +480,12 @@ public class RoleJDBCTemplateDAO extends FlowableBaseDAOImpl implements RoleDAO{
 		role.setId(newRoleId);
 		parameters[0] =  role.getId();
  
+ 		
  		parameters[1] = role.getName();
- 		parameters[2] = role.getCode();		
+ 		
+ 		
+ 		parameters[2] = role.getCode();
+ 				
  				
  		return parameters;
  	}

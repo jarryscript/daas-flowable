@@ -3,11 +3,13 @@ package com.doublechain.flowable.candidateelement;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -216,13 +218,22 @@ public class CandidateElementManagerImpl extends CustomFlowableCheckerManager im
 		
 
 		if(CandidateElement.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfCandidateElement(parseString(newValueExpr));
+		
+			
 		}
 		if(CandidateElement.TYPE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTypeOfCandidateElement(parseString(newValueExpr));
+		
+			
 		}
 		if(CandidateElement.IMAGE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkImageOfCandidateElement(parseString(newValueExpr));
+		
+			
 		}		
 
 		
@@ -580,6 +591,42 @@ public class CandidateElementManagerImpl extends CustomFlowableCheckerManager im
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<CandidateElement> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<CandidateContainer> containerList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, CandidateContainer.class);
+		userContext.getDAOGroup().enhanceList(containerList, CandidateContainer.class);
+
+	
+    }
+	
+	public Object listByContainer(FlowableUserContext userContext,String containerId) throws Exception {
+		return listPageByContainer(userContext, containerId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByContainer(FlowableUserContext userContext,String containerId, int start, int count) throws Exception {
+		SmartList<CandidateElement> list = candidateElementDaoOf(userContext).findCandidateElementByContainer(containerId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(CandidateElement.class);
+		page.setContainerObject(CandidateContainer.withId(containerId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("容器列表");
+		page.setRequestName("listByContainer");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByContainer");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

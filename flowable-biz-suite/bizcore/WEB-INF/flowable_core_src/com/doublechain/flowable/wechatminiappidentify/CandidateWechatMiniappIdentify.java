@@ -16,3 +16,4 @@ public class CandidateWechatMiniappIdentify extends BaseCandidateEntity<WechatMi
 
 
 
+

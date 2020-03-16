@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 public class FlowableChecker extends BaseChecker{
 
 	
@@ -73,7 +74,7 @@ public class FlowableChecker extends BaseChecker{
 	public static final String  AGE_OF_USER ="user.age";
 	public FlowableChecker checkAgeOfUser(int age)
 	{		
-	 	checkIntegerRange(age,1, 1-100,AGE_OF_USER ); 		
+	 	checkIntegerRange(age,1, 100,AGE_OF_USER ); 		
 		
 		return this;
 	}	
@@ -1426,6 +1427,7 @@ public class FlowableChecker extends BaseChecker{
 		return this;
 	}	
 }
+
 
 
 

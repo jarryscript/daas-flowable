@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.SmartList;
 import com.doublechain.flowable.KeyValuePair;
@@ -85,6 +86,7 @@ public class HolydaySetting extends BaseEntity implements  java.io.Serializable{
     
     
 	protected void changeLeaveDaysProperty(String newValueExpr){
+	
 		int oldValue = getLeaveDays();
 		int newValue = parseInt(newValueExpr);
 		if(equalsInt(oldValue , newValue)){
@@ -94,7 +96,7 @@ public class HolydaySetting extends BaseEntity implements  java.io.Serializable{
 		updateLeaveDays(newValue);
 		this.onChangeProperty(LEAVE_DAYS_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			

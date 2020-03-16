@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.SmartList;
 import com.doublechain.flowable.KeyValuePair;
@@ -100,6 +101,7 @@ public class Role extends BaseEntity implements  java.io.Serializable{
     
     
 	protected void changeNameProperty(String newValueExpr){
+	
 		String oldValue = getName();
 		String newValue = parseString(newValueExpr);
 		if(equalsString(oldValue , newValue)){
@@ -109,12 +111,13 @@ public class Role extends BaseEntity implements  java.io.Serializable{
 		updateName(newValue);
 		this.onChangeProperty(NAME_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			
 			
 	protected void changeCodeProperty(String newValueExpr){
+	
 		String oldValue = getCode();
 		String newValue = parseString(newValueExpr);
 		if(equalsString(oldValue , newValue)){
@@ -124,7 +127,7 @@ public class Role extends BaseEntity implements  java.io.Serializable{
 		updateCode(newValue);
 		this.onChangeProperty(CODE_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			

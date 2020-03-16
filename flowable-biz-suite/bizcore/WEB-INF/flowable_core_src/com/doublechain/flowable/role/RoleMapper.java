@@ -26,7 +26,9 @@ public class RoleMapper extends BaseRowMapper<Role>{
 	protected void setId(Role role, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String id = rs.getString(RoleTable.COLUMN_ID);
+		
 		if(id == null){
 			//do nothing when nothing found in database
 			return;
@@ -38,7 +40,9 @@ public class RoleMapper extends BaseRowMapper<Role>{
 	protected void setName(Role role, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String name = rs.getString(RoleTable.COLUMN_NAME);
+		
 		if(name == null){
 			//do nothing when nothing found in database
 			return;
@@ -50,7 +54,9 @@ public class RoleMapper extends BaseRowMapper<Role>{
 	protected void setCode(Role role, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String code = rs.getString(RoleTable.COLUMN_CODE);
+		
 		if(code == null){
 			//do nothing when nothing found in database
 			return;
@@ -62,7 +68,9 @@ public class RoleMapper extends BaseRowMapper<Role>{
 	protected void setVersion(Role role, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Integer version = rs.getInt(RoleTable.COLUMN_VERSION);
+		
 		if(version == null){
 			//do nothing when nothing found in database
 			return;

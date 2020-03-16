@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.FlowableUserContext;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.BaseManager;
@@ -41,6 +42,12 @@ public interface UserManager extends BaseManager{
 	*/
 
 
+	public Object listByDistrict(FlowableUserContext userContext,String districtId) throws Exception;
+	public Object listPageByDistrict(FlowableUserContext userContext,String districtId, int start, int count) throws Exception;
+  
+	public Object listByRole(FlowableUserContext userContext,String roleId) throws Exception;
+	public Object listPageByRole(FlowableUserContext userContext,String roleId, int start, int count) throws Exception;
+  
 
 }
 

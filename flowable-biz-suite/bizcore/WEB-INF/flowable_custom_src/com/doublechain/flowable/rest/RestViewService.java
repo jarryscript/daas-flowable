@@ -69,15 +69,14 @@ public abstract class RestViewService extends BaseRestViewService{
 	}
 	
 	// 这个程序员很懒,什么也没留下(submit application)
-	public Object customerSubmitApplication(FlowableUserContext userContext, String applicationForm) throws Exception {
-		String accessUrl = makeUrlF("customerSubmitApplication", false, applicationForm);
+	public Object customerSubmitApplication(FlowableUserContext userContext) throws Exception {
+		String accessUrl = makeUrlF("customerSubmitApplication", false);
 		
 		CustomFlowableUserContextImpl ctx = (CustomFlowableUserContextImpl) userContext;
 		ctx.setAccessUrl(accessUrl);
 		ensureCurrentUserInfo(ctx);
 		ctx.addFootprint(this);
-		ctx.setApplicationForm(applicationForm);
-		commonLog(ctx, "customerSubmitApplication", "这个程序员很懒,什么也没留下", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("", false, applicationForm), null);
+		commonLog(ctx, "customerSubmitApplication", "这个程序员很懒,什么也没留下", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("", false), null);
 		int resultCode = processRequestCustomerSubmitApplication(ctx);
 		if (returnRightNow(resultCode)){
 			return ctx.getResultObject();

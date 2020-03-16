@@ -47,12 +47,12 @@ public class MePage extends BaseViewPage {
 
 	@Override
 	public void assemblerContent(FlowableUserContext userContext, String requestName) throws Exception {
-		CustomFlowableUserContextImpl ctx = (CustomFlowableUserContextImpl) userContext;
-		setPageTitle("主页");
-		if (ctx.is(Role.BOSS) || ctx.is(Role.MANAGER)) {
-			assembleApprovals(ctx);
-		}
-		assembleMyApplications(ctx);
+//		CustomFlowableUserContextImpl ctx = (CustomFlowableUserContextImpl) userContext;
+//		setPageTitle("主页");
+//		if (ctx.is(Role.BOSS) || ctx.is(Role.MANAGER)) {
+//			assembleApprovals(ctx);
+//		}
+//		assembleMyApplications(ctx);
 	}
 
 	protected void assembleMyApplications(CustomFlowableUserContextImpl ctx) {

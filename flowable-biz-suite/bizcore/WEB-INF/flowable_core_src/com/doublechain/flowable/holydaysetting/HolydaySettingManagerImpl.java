@@ -3,11 +3,13 @@ package com.doublechain.flowable.holydaysetting;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -214,7 +216,10 @@ public class HolydaySettingManagerImpl extends CustomFlowableCheckerManager impl
 
 		
 		if(HolydaySetting.LEAVE_DAYS_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLeaveDaysOfHolydaySetting(parseInt(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(HolydaySettingManagerException.class);
@@ -604,6 +609,42 @@ public class HolydaySettingManagerImpl extends CustomFlowableCheckerManager impl
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<HolydaySetting> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<LeaveRecordType> typeList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, LeaveRecordType.class);
+		userContext.getDAOGroup().enhanceList(typeList, LeaveRecordType.class);
+
+	
+    }
+	
+	public Object listByType(FlowableUserContext userContext,String typeId) throws Exception {
+		return listPageByType(userContext, typeId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByType(FlowableUserContext userContext,String typeId, int start, int count) throws Exception {
+		SmartList<HolydaySetting> list = holydaySettingDaoOf(userContext).findHolydaySettingByType(typeId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(HolydaySetting.class);
+		page.setContainerObject(LeaveRecordType.withId(typeId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("类型列表");
+		page.setRequestName("listByType");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByType");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

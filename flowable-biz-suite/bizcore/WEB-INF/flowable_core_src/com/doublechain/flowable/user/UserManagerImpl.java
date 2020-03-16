@@ -3,11 +3,13 @@ package com.doublechain.flowable.user;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -236,19 +238,34 @@ public class UserManagerImpl extends CustomFlowableCheckerManager implements Use
 		
 
 		if(User.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfUser(parseString(newValueExpr));
+		
+			
 		}
 		if(User.MOBILE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkMobileOfUser(parseString(newValueExpr));
+		
+			
 		}
 		if(User.AVATAR_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkAvatarOfUser(parseString(newValueExpr));
+		
+			
 		}
 		if(User.AGE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkAgeOfUser(parseInt(newValueExpr));
+		
+			
 		}
 		if(User.DESCRIPTION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDescriptionOfUser(parseString(newValueExpr));
+		
+			
 		}		
 
 				
@@ -796,11 +813,15 @@ public class UserManagerImpl extends CustomFlowableCheckerManager implements Use
 		
 
 		if(LeaveRecord.FROMDATE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkFromdateOfLeaveRecord(parseDate(newValueExpr));
+		
 		}
 		
 		if(LeaveRecord.TODATE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTodateOfLeaveRecord(parseDate(newValueExpr));
+		
 		}
 		
 	
@@ -987,6 +1008,66 @@ public class UserManagerImpl extends CustomFlowableCheckerManager implements Use
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<User> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<District> districtList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, District.class);
+		userContext.getDAOGroup().enhanceList(districtList, District.class);
+		List<Role> roleList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, Role.class);
+		userContext.getDAOGroup().enhanceList(roleList, Role.class);
+
+	
+    }
+	
+	public Object listByDistrict(FlowableUserContext userContext,String districtId) throws Exception {
+		return listPageByDistrict(userContext, districtId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByDistrict(FlowableUserContext userContext,String districtId, int start, int count) throws Exception {
+		SmartList<User> list = userDaoOf(userContext).findUserByDistrict(districtId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(User.class);
+		page.setContainerObject(District.withId(districtId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("区/县列表");
+		page.setRequestName("listByDistrict");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByDistrict");
+		return page.doRender(userContext);
+	}
+  
+	public Object listByRole(FlowableUserContext userContext,String roleId) throws Exception {
+		return listPageByRole(userContext, roleId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByRole(FlowableUserContext userContext,String roleId, int start, int count) throws Exception {
+		SmartList<User> list = userDaoOf(userContext).findUserByRole(roleId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(User.class);
+		page.setContainerObject(Role.withId(roleId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("角色列表");
+		page.setRequestName("listByRole");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByRole");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

@@ -636,8 +636,12 @@ public class LeaveRecordJDBCTemplateDAO extends FlowableBaseDAOImpl implements L
  			parameters[1] = leaveRecord.getType().getId();
  		}
  
+ 		
  		parameters[2] = leaveRecord.getFromdate();
- 		parameters[3] = leaveRecord.getTodate(); 	
+ 		
+ 		
+ 		parameters[3] = leaveRecord.getTodate();
+ 		 	
  		if(leaveRecord.getPlatform() != null){
  			parameters[4] = leaveRecord.getPlatform().getId();
  		}
@@ -664,8 +668,12 @@ public class LeaveRecordJDBCTemplateDAO extends FlowableBaseDAOImpl implements L
  		
  		}
  		
+ 		
  		parameters[3] = leaveRecord.getFromdate();
- 		parameters[4] = leaveRecord.getTodate(); 	
+ 		
+ 		
+ 		parameters[4] = leaveRecord.getTodate();
+ 		 	
  		if(leaveRecord.getPlatform() != null){
  			parameters[5] = leaveRecord.getPlatform().getId();
  		

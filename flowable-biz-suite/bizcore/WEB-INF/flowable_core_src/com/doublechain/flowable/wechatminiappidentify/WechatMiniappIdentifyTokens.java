@@ -120,3 +120,4 @@ public class WechatMiniappIdentifyTokens extends CommonTokens{
 
 
 
+

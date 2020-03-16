@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.SmartList;
 import com.doublechain.flowable.KeyValuePair;
@@ -112,6 +113,7 @@ public class User extends BaseEntity implements  java.io.Serializable{
     
     
 	protected void changeNameProperty(String newValueExpr){
+	
 		String oldValue = getName();
 		String newValue = parseString(newValueExpr);
 		if(equalsString(oldValue , newValue)){
@@ -121,12 +123,13 @@ public class User extends BaseEntity implements  java.io.Serializable{
 		updateName(newValue);
 		this.onChangeProperty(NAME_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			
 			
 	protected void changeMobileProperty(String newValueExpr){
+	
 		String oldValue = getMobile();
 		String newValue = parseString(newValueExpr);
 		if(equalsString(oldValue , newValue)){
@@ -136,12 +139,13 @@ public class User extends BaseEntity implements  java.io.Serializable{
 		updateMobile(newValue);
 		this.onChangeProperty(MOBILE_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			
 			
 	protected void changeAvatarProperty(String newValueExpr){
+	
 		String oldValue = getAvatar();
 		String newValue = parseString(newValueExpr);
 		if(equalsString(oldValue , newValue)){
@@ -151,12 +155,13 @@ public class User extends BaseEntity implements  java.io.Serializable{
 		updateAvatar(newValue);
 		this.onChangeProperty(AVATAR_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			
 			
 	protected void changeAgeProperty(String newValueExpr){
+	
 		int oldValue = getAge();
 		int newValue = parseInt(newValueExpr);
 		if(equalsInt(oldValue , newValue)){
@@ -166,12 +171,13 @@ public class User extends BaseEntity implements  java.io.Serializable{
 		updateAge(newValue);
 		this.onChangeProperty(AGE_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			
 			
 	protected void changeDescriptionProperty(String newValueExpr){
+	
 		String oldValue = getDescription();
 		String newValue = parseString(newValueExpr);
 		if(equalsString(oldValue , newValue)){
@@ -181,7 +187,7 @@ public class User extends BaseEntity implements  java.io.Serializable{
 		updateDescription(newValue);
 		this.onChangeProperty(DESCRIPTION_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			

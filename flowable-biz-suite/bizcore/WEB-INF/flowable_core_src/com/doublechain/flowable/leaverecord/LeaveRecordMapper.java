@@ -32,7 +32,9 @@ public class LeaveRecordMapper extends BaseRowMapper<LeaveRecord>{
 	protected void setId(LeaveRecord leaveRecord, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String id = rs.getString(LeaveRecordTable.COLUMN_ID);
+		
 		if(id == null){
 			//do nothing when nothing found in database
 			return;
@@ -80,7 +82,9 @@ public class LeaveRecordMapper extends BaseRowMapper<LeaveRecord>{
 	protected void setFromdate(LeaveRecord leaveRecord, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Date fromdate = rs.getDate(LeaveRecordTable.COLUMN_FROMDATE);
+		
 		if(fromdate == null){
 			//do nothing when nothing found in database
 			return;
@@ -92,7 +96,9 @@ public class LeaveRecordMapper extends BaseRowMapper<LeaveRecord>{
 	protected void setTodate(LeaveRecord leaveRecord, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Date todate = rs.getDate(LeaveRecordTable.COLUMN_TODATE);
+		
 		if(todate == null){
 			//do nothing when nothing found in database
 			return;
@@ -122,7 +128,9 @@ public class LeaveRecordMapper extends BaseRowMapper<LeaveRecord>{
 	protected void setVersion(LeaveRecord leaveRecord, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Integer version = rs.getInt(LeaveRecordTable.COLUMN_VERSION);
+		
 		if(version == null){
 			//do nothing when nothing found in database
 			return;

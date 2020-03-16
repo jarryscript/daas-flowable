@@ -3,11 +3,13 @@ package com.doublechain.flowable.formfield;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -240,51 +242,96 @@ public class FormFieldManagerImpl extends CustomFlowableCheckerManager implement
 		
 
 		if(FormField.LABEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLabelOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.LOCALE_KEY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLocaleKeyOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.PARAMETER_NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkParameterNameOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.TYPE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTypeOfFormField(parseString(newValueExpr));
+		
+			
 		}		
 
 		
 		if(FormField.PLACEHOLDER_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkPlaceholderOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.DEFAULT_VALUE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDefaultValueOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.DESCRIPTION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDescriptionOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.FIELD_GROUP_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkFieldGroupOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.MINIMUM_VALUE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkMinimumValueOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.MAXIMUM_VALUE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkMaximumValueOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.REQUIRED_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkRequiredOfFormField(parseBoolean(newValueExpr));
+		
+			
 		}
 		if(FormField.DISABLED_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDisabledOfFormField(parseBoolean(newValueExpr));
+		
+			
 		}
 		if(FormField.CUSTOM_RENDERING_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkCustomRenderingOfFormField(parseBoolean(newValueExpr));
+		
+			
 		}
 		if(FormField.CANDIDATE_VALUES_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkCandidateValuesOfFormField(parseString(newValueExpr));
+		
+			
 		}
 		if(FormField.SUGGEST_VALUES_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkSuggestValuesOfFormField(parseString(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(FormFieldManagerException.class);
@@ -640,6 +687,42 @@ public class FormFieldManagerImpl extends CustomFlowableCheckerManager implement
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<FormField> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<GenericForm> formList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, GenericForm.class);
+		userContext.getDAOGroup().enhanceList(formList, GenericForm.class);
+
+	
+    }
+	
+	public Object listByForm(FlowableUserContext userContext,String formId) throws Exception {
+		return listPageByForm(userContext, formId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByForm(FlowableUserContext userContext,String formId, int start, int count) throws Exception {
+		SmartList<FormField> list = formFieldDaoOf(userContext).findFormFieldByForm(formId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(FormField.class);
+		page.setContainerObject(GenericForm.withId(formId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("形式列表");
+		page.setRequestName("listByForm");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByForm");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

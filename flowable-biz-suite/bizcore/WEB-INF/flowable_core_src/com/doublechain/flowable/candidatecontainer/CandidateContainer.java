@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.SmartList;
 import com.doublechain.flowable.KeyValuePair;
@@ -84,6 +85,7 @@ public class CandidateContainer extends BaseEntity implements  java.io.Serializa
     
     
 	protected void changeNameProperty(String newValueExpr){
+	
 		String oldValue = getName();
 		String newValue = parseString(newValueExpr);
 		if(equalsString(oldValue , newValue)){
@@ -93,7 +95,7 @@ public class CandidateContainer extends BaseEntity implements  java.io.Serializa
 		updateName(newValue);
 		this.onChangeProperty(NAME_PROPERTY, oldValue, newValue);
 		return;
-  
+   
 	}
 			
 			

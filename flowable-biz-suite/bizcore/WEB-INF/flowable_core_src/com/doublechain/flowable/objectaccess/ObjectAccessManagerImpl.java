@@ -3,11 +3,13 @@ package com.doublechain.flowable.objectaccess;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -232,37 +234,70 @@ public class ObjectAccessManagerImpl extends CustomFlowableCheckerManager implem
 		
 
 		if(ObjectAccess.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.OBJECT_TYPE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkObjectTypeOfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST1_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList1OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST2_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList2OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST3_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList3OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST4_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList4OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST5_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList5OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST6_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList6OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST7_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList7OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST8_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList8OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}
 		if(ObjectAccess.LIST9_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkList9OfObjectAccess(parseString(newValueExpr));
+		
+			
 		}		
 
 		
@@ -620,6 +655,42 @@ public class ObjectAccessManagerImpl extends CustomFlowableCheckerManager implem
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<ObjectAccess> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<UserApp> appList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, UserApp.class);
+		userContext.getDAOGroup().enhanceList(appList, UserApp.class);
+
+	
+    }
+	
+	public Object listByApp(FlowableUserContext userContext,String appId) throws Exception {
+		return listPageByApp(userContext, appId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByApp(FlowableUserContext userContext,String appId, int start, int count) throws Exception {
+		SmartList<ObjectAccess> list = objectAccessDaoOf(userContext).findObjectAccessByApp(appId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(ObjectAccess.class);
+		page.setContainerObject(UserApp.withId(appId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("应用程序列表");
+		page.setRequestName("listByApp");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByApp");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

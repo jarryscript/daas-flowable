@@ -3,11 +3,13 @@ package com.doublechain.flowable.genericform;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -227,10 +229,16 @@ public class GenericFormManagerImpl extends CustomFlowableCheckerManager impleme
 		
 
 		if(GenericForm.TITLE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTitleOfGenericForm(parseString(newValueExpr));
+		
+			
 		}
 		if(GenericForm.DESCRIPTION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDescriptionOfGenericForm(parseString(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(GenericFormManagerException.class);
@@ -579,11 +587,15 @@ public class GenericFormManagerImpl extends CustomFlowableCheckerManager impleme
 		
 
 		if(FormMessage.TITLE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTitleOfFormMessage(parseString(newValueExpr));
+		
 		}
 		
 		if(FormMessage.LEVEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLevelOfFormMessage(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -823,15 +835,21 @@ public class GenericFormManagerImpl extends CustomFlowableCheckerManager impleme
 		
 
 		if(FormFieldMessage.TITLE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTitleOfFormFieldMessage(parseString(newValueExpr));
+		
 		}
 		
 		if(FormFieldMessage.PARAMETER_NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkParameterNameOfFormFieldMessage(parseString(newValueExpr));
+		
 		}
 		
 		if(FormFieldMessage.LEVEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLevelOfFormFieldMessage(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -1131,63 +1149,93 @@ public class GenericFormManagerImpl extends CustomFlowableCheckerManager impleme
 		
 
 		if(FormField.LABEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLabelOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.LOCALE_KEY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLocaleKeyOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.PARAMETER_NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkParameterNameOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.TYPE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTypeOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.PLACEHOLDER_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkPlaceholderOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.DEFAULT_VALUE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDefaultValueOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.DESCRIPTION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDescriptionOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.FIELD_GROUP_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkFieldGroupOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.MINIMUM_VALUE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkMinimumValueOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.MAXIMUM_VALUE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkMaximumValueOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.REQUIRED_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkRequiredOfFormField(parseBoolean(newValueExpr));
+		
 		}
 		
 		if(FormField.DISABLED_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDisabledOfFormField(parseBoolean(newValueExpr));
+		
 		}
 		
 		if(FormField.CUSTOM_RENDERING_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkCustomRenderingOfFormField(parseBoolean(newValueExpr));
+		
 		}
 		
 		if(FormField.CANDIDATE_VALUES_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkCandidateValuesOfFormField(parseString(newValueExpr));
+		
 		}
 		
 		if(FormField.SUGGEST_VALUES_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkSuggestValuesOfFormField(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -1437,23 +1485,33 @@ public class GenericFormManagerImpl extends CustomFlowableCheckerManager impleme
 		
 
 		if(FormAction.LABEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLabelOfFormAction(parseString(newValueExpr));
+		
 		}
 		
 		if(FormAction.LOCALE_KEY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLocaleKeyOfFormAction(parseString(newValueExpr));
+		
 		}
 		
 		if(FormAction.ACTION_KEY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkActionKeyOfFormAction(parseString(newValueExpr));
+		
 		}
 		
 		if(FormAction.LEVEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLevelOfFormAction(parseString(newValueExpr));
+		
 		}
 		
 		if(FormAction.URL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkUrlOfFormAction(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -1640,6 +1698,18 @@ public class GenericFormManagerImpl extends CustomFlowableCheckerManager impleme
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<GenericForm> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+
+	
+    }
+	
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.FlowableUserContext;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.BaseManager;
@@ -41,6 +42,12 @@ public interface CityManager extends BaseManager{
 	*/
 
 
+	public Object listByProvince(FlowableUserContext userContext,String provinceId) throws Exception;
+	public Object listPageByProvince(FlowableUserContext userContext,String provinceId, int start, int count) throws Exception;
+  
+	public Object listByPlatform(FlowableUserContext userContext,String platformId) throws Exception;
+	public Object listPageByPlatform(FlowableUserContext userContext,String platformId, int start, int count) throws Exception;
+  
 
 }
 

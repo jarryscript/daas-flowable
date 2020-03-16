@@ -636,7 +636,9 @@ public class CityJDBCTemplateDAO extends FlowableBaseDAOImpl implements CityDAO{
  	protected Object[] prepareCityUpdateParameters(City city){
  		Object[] parameters = new Object[6];
  
- 		parameters[0] = city.getName(); 	
+ 		
+ 		parameters[0] = city.getName();
+ 		 	
  		if(city.getProvince() != null){
  			parameters[1] = city.getProvince().getId();
  		}
@@ -657,7 +659,9 @@ public class CityJDBCTemplateDAO extends FlowableBaseDAOImpl implements CityDAO{
 		city.setId(newCityId);
 		parameters[0] =  city.getId();
  
- 		parameters[1] = city.getName(); 	
+ 		
+ 		parameters[1] = city.getName();
+ 		 	
  		if(city.getProvince() != null){
  			parameters[2] = city.getProvince().getId();
  		

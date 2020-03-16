@@ -3,11 +3,13 @@ package com.doublechain.flowable.leaverecord;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -234,10 +236,16 @@ public class LeaveRecordManagerImpl extends CustomFlowableCheckerManager impleme
 
 		
 		if(LeaveRecord.FROMDATE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkFromdateOfLeaveRecord(parseDate(newValueExpr));
+		
+			
 		}
 		if(LeaveRecord.TODATE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTodateOfLeaveRecord(parseDate(newValueExpr));
+		
+			
 		}		
 
 		
@@ -747,6 +755,90 @@ public class LeaveRecordManagerImpl extends CustomFlowableCheckerManager impleme
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<LeaveRecord> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<User> userList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, User.class);
+		userContext.getDAOGroup().enhanceList(userList, User.class);
+		List<LeaveRecordType> typeList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, LeaveRecordType.class);
+		userContext.getDAOGroup().enhanceList(typeList, LeaveRecordType.class);
+		List<Platform> platformList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, Platform.class);
+		userContext.getDAOGroup().enhanceList(platformList, Platform.class);
+
+	
+    }
+	
+	public Object listByUser(FlowableUserContext userContext,String userId) throws Exception {
+		return listPageByUser(userContext, userId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByUser(FlowableUserContext userContext,String userId, int start, int count) throws Exception {
+		SmartList<LeaveRecord> list = leaveRecordDaoOf(userContext).findLeaveRecordByUser(userId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(LeaveRecord.class);
+		page.setContainerObject(User.withId(userId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("用户列表");
+		page.setRequestName("listByUser");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByUser");
+		return page.doRender(userContext);
+	}
+  
+	public Object listByType(FlowableUserContext userContext,String typeId) throws Exception {
+		return listPageByType(userContext, typeId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByType(FlowableUserContext userContext,String typeId, int start, int count) throws Exception {
+		SmartList<LeaveRecord> list = leaveRecordDaoOf(userContext).findLeaveRecordByType(typeId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(LeaveRecord.class);
+		page.setContainerObject(LeaveRecordType.withId(typeId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("类型列表");
+		page.setRequestName("listByType");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByType");
+		return page.doRender(userContext);
+	}
+  
+	public Object listByPlatform(FlowableUserContext userContext,String platformId) throws Exception {
+		return listPageByPlatform(userContext, platformId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByPlatform(FlowableUserContext userContext,String platformId, int start, int count) throws Exception {
+		SmartList<LeaveRecord> list = leaveRecordDaoOf(userContext).findLeaveRecordByPlatform(platformId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(LeaveRecord.class);
+		page.setContainerObject(Platform.withId(platformId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("平台列表");
+		page.setRequestName("listByPlatform");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByPlatform");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

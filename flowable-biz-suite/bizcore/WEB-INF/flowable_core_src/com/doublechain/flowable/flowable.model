@@ -1,4 +1,83 @@
-model is not available
+<root org="doublechain" chinese_name="EHR" english_name="EHR">
+
+  <platform
+    name="EHR"
+    founded="now()"
+    _features="custom"
+  />
+
+  <!--用户-->
+  <user
+    name="王大锤"
+    mobile="13987654321"
+    avatar="image()"
+    age="25|[1,100]"
+    description="text()"
+    district="$(district)"
+    role="$(role)"
+    _features="merchant"
+  />
+
+  <role
+    name="员工|主管|老板"
+    code="EMPLOYEE|MANAGER|BOSS"
+    _features="status"
+    _identified_by="code"
+  />
+
+
+  <!-- 用户的请假记录-->
+  <leave_record
+    user="$(user)"
+    type="$(leave_record_type)"
+    fromDate="2020-02-02"
+    toDate="2020-02-04"
+    platform="$(platform)"
+  />
+
+  <!--假期类型-->
+  <leave_record_type
+    name="年假|病假|事假|婚假|产假"
+    code="ANNUAL_LEAVE|SICK_LEACK|PERSONAL_LEAVE|MARRIAGE_HOLIDAY|MATERNITY_LEAVE"
+    _features="status"
+    _identified_by="code"
+  />
+
+  <!--假期设置-->
+  <holyday_setting
+    type="$(leave_record_type)"
+    leave_days="10|[0,100]"
+    _features="setting"
+  />
+
+
+  <!-- 省 -->
+  <province
+    name="四川|北京|[1,120]"
+    platform="$(platform)"
+    _features="setting"
+  />
+
+  <!-- 市 -->
+  <city
+    name="成都|北京|[1,120]"
+    province="$(province)"
+    platform="$(platform)"
+    _features="setting"
+  />
+
+  <!-- 区 -->
+  <district
+    name="成华区|朝阳区|锦江区|海淀区|[1,120]"
+    city="$(city)"
+    platform="$(platform)"
+    _features="setting"
+  />
+
+
+</root>
+
+
 
 
 

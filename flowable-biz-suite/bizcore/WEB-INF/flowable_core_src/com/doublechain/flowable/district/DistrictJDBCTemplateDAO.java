@@ -636,7 +636,9 @@ public class DistrictJDBCTemplateDAO extends FlowableBaseDAOImpl implements Dist
  	protected Object[] prepareDistrictUpdateParameters(District district){
  		Object[] parameters = new Object[6];
  
- 		parameters[0] = district.getName(); 	
+ 		
+ 		parameters[0] = district.getName();
+ 		 	
  		if(district.getCity() != null){
  			parameters[1] = district.getCity().getId();
  		}
@@ -657,7 +659,9 @@ public class DistrictJDBCTemplateDAO extends FlowableBaseDAOImpl implements Dist
 		district.setId(newDistrictId);
 		parameters[0] =  district.getId();
  
- 		parameters[1] = district.getName(); 	
+ 		
+ 		parameters[1] = district.getName();
+ 		 	
  		if(district.getCity() != null){
  			parameters[2] = district.getCity().getId();
  		

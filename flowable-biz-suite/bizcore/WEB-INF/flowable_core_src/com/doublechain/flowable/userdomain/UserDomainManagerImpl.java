@@ -3,11 +3,13 @@ package com.doublechain.flowable.userdomain;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -215,7 +217,10 @@ public class UserDomainManagerImpl extends CustomFlowableCheckerManager implemen
 		
 
 		if(UserDomain.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfUserDomain(parseString(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(UserDomainManagerException.class);
@@ -562,11 +567,15 @@ public class UserDomainManagerImpl extends CustomFlowableCheckerManager implemen
 		
 
 		if(UserWhiteList.USER_IDENTITY_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkUserIdentityOfUserWhiteList(parseString(newValueExpr));
+		
 		}
 		
 		if(UserWhiteList.USER_SPECIAL_FUNCTIONS_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkUserSpecialFunctionsOfUserWhiteList(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -841,43 +850,63 @@ public class UserDomainManagerImpl extends CustomFlowableCheckerManager implemen
 		
 
 		if(SecUser.LOGIN_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLoginOfSecUser(parseString(newValueExpr));
+		
 		}
 		
 		if(SecUser.MOBILE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkMobileOfSecUser(parseString(newValueExpr));
+		
 		}
 		
 		if(SecUser.EMAIL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkEmailOfSecUser(parseString(newValueExpr));
+		
 		}
 		
 		if(SecUser.PWD_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkPwdOfSecUser(parseString(newValueExpr));
+		
 		}
 		
 		if(SecUser.WEIXIN_OPENID_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkWeixinOpenidOfSecUser(parseString(newValueExpr));
+		
 		}
 		
 		if(SecUser.WEIXIN_APPID_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkWeixinAppidOfSecUser(parseString(newValueExpr));
+		
 		}
 		
 		if(SecUser.ACCESS_TOKEN_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkAccessTokenOfSecUser(parseString(newValueExpr));
+		
 		}
 		
 		if(SecUser.VERIFICATION_CODE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkVerificationCodeOfSecUser(parseInt(newValueExpr));
+		
 		}
 		
 		if(SecUser.VERIFICATION_CODE_EXPIRE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkVerificationCodeExpireOfSecUser(parseTimestamp(newValueExpr));
+		
 		}
 		
 		if(SecUser.LAST_LOGIN_TIME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLastLoginTimeOfSecUser(parseTimestamp(newValueExpr));
+		
 		}
 		
 	
@@ -1064,6 +1093,18 @@ public class UserDomainManagerImpl extends CustomFlowableCheckerManager implemen
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<UserDomain> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+
+	
+    }
+	
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

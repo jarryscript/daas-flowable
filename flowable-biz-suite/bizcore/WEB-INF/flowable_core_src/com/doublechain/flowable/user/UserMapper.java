@@ -33,7 +33,9 @@ public class UserMapper extends BaseRowMapper<User>{
 	protected void setId(User user, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String id = rs.getString(UserTable.COLUMN_ID);
+		
 		if(id == null){
 			//do nothing when nothing found in database
 			return;
@@ -45,7 +47,9 @@ public class UserMapper extends BaseRowMapper<User>{
 	protected void setName(User user, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String name = rs.getString(UserTable.COLUMN_NAME);
+		
 		if(name == null){
 			//do nothing when nothing found in database
 			return;
@@ -57,7 +61,9 @@ public class UserMapper extends BaseRowMapper<User>{
 	protected void setMobile(User user, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String mobile = rs.getString(UserTable.COLUMN_MOBILE);
+		
 		if(mobile == null){
 			//do nothing when nothing found in database
 			return;
@@ -69,7 +75,9 @@ public class UserMapper extends BaseRowMapper<User>{
 	protected void setAvatar(User user, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String avatar = rs.getString(UserTable.COLUMN_AVATAR);
+		
 		if(avatar == null){
 			//do nothing when nothing found in database
 			return;
@@ -81,7 +89,9 @@ public class UserMapper extends BaseRowMapper<User>{
 	protected void setAge(User user, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Integer age = rs.getInt(UserTable.COLUMN_AGE);
+		
 		if(age == null){
 			//do nothing when nothing found in database
 			return;
@@ -93,7 +103,9 @@ public class UserMapper extends BaseRowMapper<User>{
 	protected void setDescription(User user, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		String description = rs.getString(UserTable.COLUMN_DESCRIPTION);
+		
 		if(description == null){
 			//do nothing when nothing found in database
 			return;
@@ -141,7 +153,9 @@ public class UserMapper extends BaseRowMapper<User>{
 	protected void setVersion(User user, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
+		
 		Integer version = rs.getInt(UserTable.COLUMN_VERSION);
+		
 		if(version == null){
 			//do nothing when nothing found in database
 			return;

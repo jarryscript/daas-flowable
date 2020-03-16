@@ -3,11 +3,13 @@ package com.doublechain.flowable.city;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -227,7 +229,10 @@ public class CityManagerImpl extends CustomFlowableCheckerManager implements Cit
 		
 
 		if(City.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfCity(parseString(newValueExpr));
+		
+			
 		}		
 
 				
@@ -713,7 +718,9 @@ public class CityManagerImpl extends CustomFlowableCheckerManager implements Cit
 		
 
 		if(District.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfDistrict(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -900,6 +907,66 @@ public class CityManagerImpl extends CustomFlowableCheckerManager implements Cit
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<City> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<Province> provinceList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, Province.class);
+		userContext.getDAOGroup().enhanceList(provinceList, Province.class);
+		List<Platform> platformList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, Platform.class);
+		userContext.getDAOGroup().enhanceList(platformList, Platform.class);
+
+	
+    }
+	
+	public Object listByProvince(FlowableUserContext userContext,String provinceId) throws Exception {
+		return listPageByProvince(userContext, provinceId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByProvince(FlowableUserContext userContext,String provinceId, int start, int count) throws Exception {
+		SmartList<City> list = cityDaoOf(userContext).findCityByProvince(provinceId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(City.class);
+		page.setContainerObject(Province.withId(provinceId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("省列表");
+		page.setRequestName("listByProvince");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByProvince");
+		return page.doRender(userContext);
+	}
+  
+	public Object listByPlatform(FlowableUserContext userContext,String platformId) throws Exception {
+		return listPageByPlatform(userContext, platformId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByPlatform(FlowableUserContext userContext,String platformId, int start, int count) throws Exception {
+		SmartList<City> list = cityDaoOf(userContext).findCityByPlatform(platformId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(City.class);
+		page.setContainerObject(Platform.withId(platformId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("平台列表");
+		page.setRequestName("listByPlatform");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByPlatform");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

@@ -3,11 +3,13 @@ package com.doublechain.flowable.formfieldmessage;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -216,15 +218,24 @@ public class FormFieldMessageManagerImpl extends CustomFlowableCheckerManager im
 		
 
 		if(FormFieldMessage.TITLE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTitleOfFormFieldMessage(parseString(newValueExpr));
+		
+			
 		}
 		if(FormFieldMessage.PARAMETER_NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkParameterNameOfFormFieldMessage(parseString(newValueExpr));
+		
+			
 		}		
 
 		
 		if(FormFieldMessage.LEVEL_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkLevelOfFormFieldMessage(parseString(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(FormFieldMessageManagerException.class);
@@ -580,6 +591,42 @@ public class FormFieldMessageManagerImpl extends CustomFlowableCheckerManager im
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<FormFieldMessage> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<GenericForm> formList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, GenericForm.class);
+		userContext.getDAOGroup().enhanceList(formList, GenericForm.class);
+
+	
+    }
+	
+	public Object listByForm(FlowableUserContext userContext,String formId) throws Exception {
+		return listPageByForm(userContext, formId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByForm(FlowableUserContext userContext,String formId, int start, int count) throws Exception {
+		SmartList<FormFieldMessage> list = formFieldMessageDaoOf(userContext).findFormFieldMessageByForm(formId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(FormFieldMessage.class);
+		page.setContainerObject(GenericForm.withId(formId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("形式列表");
+		page.setRequestName("listByForm");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByForm");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

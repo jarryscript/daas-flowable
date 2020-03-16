@@ -29,6 +29,7 @@ public class CustomFlowableAuthenticationProvider extends AbstractUserDetailsAut
 	@Getter
 	@Setter
 	@Value("${auth.url}")
+	//http://localhost:8880/flowable/secUserManager/login/username/password/
 	private String authUrl;
 
 
@@ -70,6 +71,7 @@ public class CustomFlowableAuthenticationProvider extends AbstractUserDetailsAut
 		@Override
 		protected void additionalAuthenticationChecks(UserDetails userDetails,
 				UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+			//TODO
 		}
 
 

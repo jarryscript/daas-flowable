@@ -3,11 +3,13 @@ package com.doublechain.flowable.candidatecontainer;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -210,7 +212,10 @@ public class CandidateContainerManagerImpl extends CustomFlowableCheckerManager 
 		
 
 		if(CandidateContainer.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfCandidateContainer(parseString(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(CandidateContainerManagerException.class);
@@ -561,15 +566,21 @@ public class CandidateContainerManagerImpl extends CustomFlowableCheckerManager 
 		
 
 		if(CandidateElement.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfCandidateElement(parseString(newValueExpr));
+		
 		}
 		
 		if(CandidateElement.TYPE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkTypeOfCandidateElement(parseString(newValueExpr));
+		
 		}
 		
 		if(CandidateElement.IMAGE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkImageOfCandidateElement(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -756,6 +767,18 @@ public class CandidateContainerManagerImpl extends CustomFlowableCheckerManager 
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<CandidateContainer> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+
+	
+    }
+	
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

@@ -1,0 +1,56 @@
+<div class="modal" ng-controller="CreateNewCodeGenAppCtrl">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header"><h2>{{'APP.POPUP.CREATE-TITLE' | translate}}</h2></div>
+			<div class="modal-body">
+                <div ng-if="model.errorMessage && model.errorMessage.length > 0" class="alert error" style="font-size: 14px; margin-top:20px">
+                  <div class="popup-error" style="font-size: 14px">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                    <span>{{model.errorMessage}}</span>
+                  </div>
+                </div>
+				<p>{{'APP.POPUP.CREATE-DESCRIPTION' | translate}}</p>
+				<div class="form-group">
+				    <label for="newAppName">事件流名称</label>
+				    <input ng-disabled="model.loading" type="text" class="form-control"
+			               id="newAppName" ng-model="model.app.name"
+                           custom-keys enter-pressed="ok()" auto-focus>
+				</div>
+				<div class="form-group">
+				    <label for="newAppKey">事件流key</label>
+				    <input ng-disabled="model.loading" type="text" class="form-control"
+			               id="newAppKey" ng-model="model.app.key">
+				</div>
+				<div class="form-group">
+				    <label for="newAppKey">生成到</label>
+				    <input ng-disabled="model.loading" type="text" class="form-control"
+			               id="newAppKey" ng-model="model.app.outputDir">
+				</div>
+				<div class="form-group">
+				    <label for="newAppKey">基础包名</label>
+				    <input ng-disabled="model.loading" type="text" class="form-control"
+			               id="newAppKey" ng-model="model.app.basePackage">
+				</div>
+					<div class="form-group">
+				    <label for="newAppKey">项目名</label>
+				    <input ng-disabled="model.loading" type="text" class="form-control"
+			               id="newAppKey" ng-model="model.app.projectName">
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<div class="pull-right">
+					<button type="button" class="btn btn-sm btn-default" ng-click="cancel()" ng-disabled="model.loading">
+						{{'GENERAL.ACTION.CANCEL' | translate}}
+					</button>
+					<button type="button" class="btn btn-sm btn-default" ng-click="ok()"ng-disabled="model.loading || !model.app.name || model.app.name.length == 0 || !model.app.key || model.app.key.length == 0 || !model.app.basePackage || model.app.basePackage.length == 0 || !model.app.projectName || model.app.projectName.length == 0 || !model.app.outputDir || model.app.outputDir.length == 0 ">
+						{{'APP.ACTION.CREATE-CONFIRM' | translate}}
+					</button>
+				</div>
+				<div class="loading pull-right" ng-show="model.loading">
+					<div class="l1"></div><div class="l2"></div><div class="l2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -3,11 +3,13 @@ package com.doublechain.flowable.province;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -219,7 +221,10 @@ public class ProvinceManagerImpl extends CustomFlowableCheckerManager implements
 		
 
 		if(Province.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfProvince(parseString(newValueExpr));
+		
+			
 		}		
 
 		
@@ -644,7 +649,9 @@ public class ProvinceManagerImpl extends CustomFlowableCheckerManager implements
 		
 
 		if(City.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfCity(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -831,6 +838,42 @@ public class ProvinceManagerImpl extends CustomFlowableCheckerManager implements
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<Province> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+		List<Platform> platformList = FlowableBaseUtils.collectReferencedObjectWithType(userContext, list, Platform.class);
+		userContext.getDAOGroup().enhanceList(platformList, Platform.class);
+
+	
+    }
+	
+	public Object listByPlatform(FlowableUserContext userContext,String platformId) throws Exception {
+		return listPageByPlatform(userContext, platformId, 0, 20);
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object listPageByPlatform(FlowableUserContext userContext,String platformId, int start, int count) throws Exception {
+		SmartList<Province> list = provinceDaoOf(userContext).findProvinceByPlatform(platformId, start, count, new HashMap<>());
+		enhanceForListOfView(userContext, list);
+		FlowableCommonListOfViewPage page = new FlowableCommonListOfViewPage();
+		page.setClassOfList(Province.class);
+		page.setContainerObject(Platform.withId(platformId));
+		page.setRequestBeanName(this.getBeanName());
+		page.setDataList((SmartList)list);
+		page.setPageTitle("平台列表");
+		page.setRequestName("listByPlatform");
+		page.setRequestOffset(start);
+		page.setRequestLimit(count);
+		page.setDisplayMode("auto");
+		
+		page.assemblerContent(userContext, "listByPlatform");
+		return page.doRender(userContext);
+	}
+  
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

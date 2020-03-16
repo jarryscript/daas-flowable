@@ -535,7 +535,9 @@ public class ProvinceJDBCTemplateDAO extends FlowableBaseDAOImpl implements Prov
  	protected Object[] prepareProvinceUpdateParameters(Province province){
  		Object[] parameters = new Object[5];
  
- 		parameters[0] = province.getName(); 	
+ 		
+ 		parameters[0] = province.getName();
+ 		 	
  		if(province.getPlatform() != null){
  			parameters[1] = province.getPlatform().getId();
  		}
@@ -552,7 +554,9 @@ public class ProvinceJDBCTemplateDAO extends FlowableBaseDAOImpl implements Prov
 		province.setId(newProvinceId);
 		parameters[0] =  province.getId();
  
- 		parameters[1] = province.getName(); 	
+ 		
+ 		parameters[1] = province.getName();
+ 		 	
  		if(province.getPlatform() != null){
  			parameters[2] = province.getPlatform().getId();
  		

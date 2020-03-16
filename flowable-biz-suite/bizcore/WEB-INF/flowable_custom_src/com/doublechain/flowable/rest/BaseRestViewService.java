@@ -431,8 +431,8 @@ public abstract class BaseRestViewService extends CustomFlowableCheckerManager i
 		return makeUrl("customerApplyForLeave");
 	}
 	// 处理请求：这个程序员很懒,什么也没留下
-	public static String makeSubmitApplicationUrl(CustomFlowableUserContextImpl ctx, String applicationForm){
-		return makeUrl("customerSubmitApplication", applicationForm);
+	public static String makeSubmitApplicationUrl(CustomFlowableUserContextImpl ctx){
+		return makeUrl("customerSubmitApplication");
 	}
 
 	/** 处理请求：查看首页. 返回值：PRC_BY_DEFAULT: ;  */

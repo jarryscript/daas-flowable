@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.doublechain.flowable.FlowableUserContext;
 import com.doublechain.flowable.BaseEntity;
 import com.doublechain.flowable.BaseManager;
@@ -30,6 +31,9 @@ public interface HolydaySettingManager extends BaseManager{
 	
 
 
+	public Object listByType(FlowableUserContext userContext,String typeId) throws Exception;
+	public Object listPageByType(FlowableUserContext userContext,String typeId, int start, int count) throws Exception;
+  
 
 }
 

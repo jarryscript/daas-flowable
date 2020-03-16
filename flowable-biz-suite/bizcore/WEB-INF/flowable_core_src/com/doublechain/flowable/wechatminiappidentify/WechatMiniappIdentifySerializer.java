@@ -22,3 +22,4 @@ public class WechatMiniappIdentifySerializer extends FlowableObjectPlainCustomSe
 
 
 
+

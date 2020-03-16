@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 public class FlowableObjectChecker extends FlowableChecker{
 
 	Set<BaseEntity> checkedObjectSet;

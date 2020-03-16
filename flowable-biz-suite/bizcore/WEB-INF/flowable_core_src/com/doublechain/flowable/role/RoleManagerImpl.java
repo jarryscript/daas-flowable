@@ -3,11 +3,13 @@ package com.doublechain.flowable.role;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 import com.terapico.caf.DateTime;
+import com.terapico.caf.Images;
 import com.terapico.caf.Password;
 
 import com.doublechain.flowable.*;
@@ -220,10 +222,16 @@ public class RoleManagerImpl extends CustomFlowableCheckerManager implements Rol
 		
 
 		if(Role.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfRole(parseString(newValueExpr));
+		
+			
 		}
 		if(Role.CODE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkCodeOfRole(parseString(newValueExpr));
+		
+			
 		}
 	
 		checkerOf(userContext).throwExceptionIfHasErrors(RoleManagerException.class);
@@ -607,23 +615,33 @@ public class RoleManagerImpl extends CustomFlowableCheckerManager implements Rol
 		
 
 		if(User.NAME_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkNameOfUser(parseString(newValueExpr));
+		
 		}
 		
 		if(User.MOBILE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkMobileOfUser(parseString(newValueExpr));
+		
 		}
 		
 		if(User.AVATAR_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkAvatarOfUser(parseString(newValueExpr));
+		
 		}
 		
 		if(User.AGE_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkAgeOfUser(parseInt(newValueExpr));
+		
 		}
 		
 		if(User.DESCRIPTION_PROPERTY.equals(property)){
+		
 			checkerOf(userContext).checkDescriptionOfUser(parseString(newValueExpr));
+		
 		}
 		
 	
@@ -810,6 +828,18 @@ public class RoleManagerImpl extends CustomFlowableCheckerManager implements Rol
 		loginResult.getLoginContext().getLoginTarget().setUserApp(userApp);
 	}
 	// -----------------------------------\\  登录部分处理 //-----------------------------------
+
+
+	// -----------------------------------// list-of-view 处理 \\-----------------------------------
+    protected void enhanceForListOfView(FlowableUserContext userContext,SmartList<Role> list) throws Exception {
+    	if (list == null || list.isEmpty()){
+    		return;
+    	}
+
+	
+    }
+	
+  // -----------------------------------\\ list-of-view 处理 //-----------------------------------
 }
 
 

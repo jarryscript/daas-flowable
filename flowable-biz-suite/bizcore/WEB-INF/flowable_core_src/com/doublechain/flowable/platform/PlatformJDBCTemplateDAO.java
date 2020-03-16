@@ -752,8 +752,12 @@ public class PlatformJDBCTemplateDAO extends FlowableBaseDAOImpl implements Plat
  	protected Object[] preparePlatformUpdateParameters(Platform platform){
  		Object[] parameters = new Object[5];
  
+ 		
  		parameters[0] = platform.getName();
- 		parameters[1] = platform.getFounded();		
+ 		
+ 		
+ 		parameters[1] = platform.getFounded();
+ 				
  		parameters[2] = platform.nextVersion();
  		parameters[3] = platform.getId();
  		parameters[4] = platform.getVersion();
@@ -766,8 +770,12 @@ public class PlatformJDBCTemplateDAO extends FlowableBaseDAOImpl implements Plat
 		platform.setId(newPlatformId);
 		parameters[0] =  platform.getId();
  
+ 		
  		parameters[1] = platform.getName();
- 		parameters[2] = platform.getFounded();		
+ 		
+ 		
+ 		parameters[2] = platform.getFounded();
+ 				
  				
  		return parameters;
  	}
